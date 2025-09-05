@@ -383,6 +383,37 @@ const UsersApiAxiosParamCreator = function (configuration) {
                 options: localVarRequestOptions,
             };
         },
+        /**
+         *
+         * @summary Verify Email
+         * @param {string} token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        verifyEmailApiV1UsersVerifyEmailGet: async (token, options = {}) => {
+            // verify required parameter 'token' is not null or undefined
+            (0, common_1.assertParamExists)('verifyEmailApiV1UsersVerifyEmailGet', 'token', token);
+            const localVarPath = `/api/v1/users/verify-email`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            if (token !== undefined) {
+                localVarQueryParameter['token'] = token;
+            }
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     };
 };
 exports.UsersApiAxiosParamCreator = UsersApiAxiosParamCreator;
@@ -420,6 +451,20 @@ const UsersApiFp = function (configuration) {
             const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['UsersApi.registerUserApiV1UsersRegisterPost']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
             return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         *
+         * @summary Verify Email
+         * @param {string} token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async verifyEmailApiV1UsersVerifyEmailGet(token, options) {
+            var _a, _b, _c;
+            const localVarAxiosArgs = await localVarAxiosParamCreator.verifyEmailApiV1UsersVerifyEmailGet(token, options);
+            const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+            const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['UsersApi.verifyEmailApiV1UsersVerifyEmailGet']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     };
 };
 exports.UsersApiFp = UsersApiFp;
@@ -448,6 +493,16 @@ const UsersApiFactory = function (configuration, basePath, axios) {
          */
         registerUserApiV1UsersRegisterPost(user, options) {
             return localVarFp.registerUserApiV1UsersRegisterPost(user, options).then((request) => request(axios, basePath));
+        },
+        /**
+         *
+         * @summary Verify Email
+         * @param {string} token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        verifyEmailApiV1UsersVerifyEmailGet(token, options) {
+            return localVarFp.verifyEmailApiV1UsersVerifyEmailGet(token, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -479,6 +534,17 @@ class UsersApi extends base_1.BaseAPI {
      */
     registerUserApiV1UsersRegisterPost(user, options) {
         return (0, exports.UsersApiFp)(this.configuration).registerUserApiV1UsersRegisterPost(user, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     *
+     * @summary Verify Email
+     * @param {string} token
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    verifyEmailApiV1UsersVerifyEmailGet(token, options) {
+        return (0, exports.UsersApiFp)(this.configuration).verifyEmailApiV1UsersVerifyEmailGet(token, options).then((request) => request(this.axios, this.basePath));
     }
 }
 exports.UsersApi = UsersApi;

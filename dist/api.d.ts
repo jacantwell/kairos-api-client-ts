@@ -88,6 +88,12 @@ export interface User {
      * @memberof User
      */
     'country'?: string | null;
+    /**
+     *
+     * @type {boolean}
+     * @memberof User
+     */
+    'is_verified'?: boolean;
 }
 /**
  *
@@ -304,6 +310,14 @@ export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) 
      * @throws {RequiredError}
      */
     registerUserApiV1UsersRegisterPost: (user: User, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @summary Verify Email
+     * @param {string} token
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    verifyEmailApiV1UsersVerifyEmailGet: (token: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
  * UsersApi - functional programming interface
@@ -325,6 +339,14 @@ export declare const UsersApiFp: (configuration?: Configuration) => {
      * @throws {RequiredError}
      */
     registerUserApiV1UsersRegisterPost(user: User, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>>;
+    /**
+     *
+     * @summary Verify Email
+     * @param {string} token
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    verifyEmailApiV1UsersVerifyEmailGet(token: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>>;
 };
 /**
  * UsersApi - factory interface
@@ -346,6 +368,14 @@ export declare const UsersApiFactory: (configuration?: Configuration, basePath?:
      * @throws {RequiredError}
      */
     registerUserApiV1UsersRegisterPost(user: User, options?: RawAxiosRequestConfig): AxiosPromise<any>;
+    /**
+     *
+     * @summary Verify Email
+     * @param {string} token
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    verifyEmailApiV1UsersVerifyEmailGet(token: string, options?: RawAxiosRequestConfig): AxiosPromise<any>;
 };
 /**
  * UsersApi - object-oriented interface
@@ -371,4 +401,13 @@ export declare class UsersApi extends BaseAPI {
      * @memberof UsersApi
      */
     registerUserApiV1UsersRegisterPost(user: User, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<any, any>>;
+    /**
+     *
+     * @summary Verify Email
+     * @param {string} token
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    verifyEmailApiV1UsersVerifyEmailGet(token: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<any, any>>;
 }

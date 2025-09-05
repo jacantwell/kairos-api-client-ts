@@ -6,6 +6,7 @@ All URIs are relative to *http://localhost*
 |------------- | ------------- | -------------|
 |[**getCurrentUserApiV1UsersMeGet**](#getcurrentuserapiv1usersmeget) | **GET** /api/v1/users/me | Get Current User|
 |[**registerUserApiV1UsersRegisterPost**](#registeruserapiv1usersregisterpost) | **POST** /api/v1/users/register | Register User|
+|[**verifyEmailApiV1UsersVerifyEmailGet**](#verifyemailapiv1usersverifyemailget) | **GET** /api/v1/users/verify-email | Verify Email|
 
 # **getCurrentUserApiV1UsersMeGet**
 > User getCurrentUserApiV1UsersMeGet()
@@ -93,6 +94,57 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Successful Response |  -  |
+|**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **verifyEmailApiV1UsersVerifyEmailGet**
+> any verifyEmailApiV1UsersVerifyEmailGet()
+
+
+### Example
+
+```typescript
+import {
+    UsersApi,
+    Configuration
+} from './api';
+
+const configuration = new Configuration();
+const apiInstance = new UsersApi(configuration);
+
+let token: string; // (default to undefined)
+
+const { status, data } = await apiInstance.verifyEmailApiV1UsersVerifyEmailGet(
+    token
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **token** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+**any**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 

@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **password** | **string** |  | [default to undefined]
 **phonenumber** | **string** |  | [optional] [default to undefined]
 **country** | **string** |  | [optional] [default to undefined]
+**is_verified** | **boolean** |  | [optional] [default to false]
 
 ## Example
 
@@ -24,6 +25,7 @@ const instance: User = {
     password,
     phonenumber,
     country,
+    is_verified,
 };
 ```
 
