@@ -72,13 +72,31 @@ export interface User {
      * @type {string}
      * @memberof User
      */
-    'username': string;
+    'email': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof User
+     */
+    'name': string;
     /**
      * 
      * @type {string}
      * @memberof User
      */
     'password': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof User
+     */
+    'phonenumber'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof User
+     */
+    'country'?: string | null;
 }
 /**
  * 

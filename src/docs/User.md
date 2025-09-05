@@ -6,8 +6,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **_id** | **string** |  | [optional] [default to undefined]
-**username** | **string** |  | [default to undefined]
+**email** | **string** |  | [default to undefined]
+**name** | **string** |  | [default to undefined]
 **password** | **string** |  | [default to undefined]
+**phonenumber** | **string** |  | [optional] [default to undefined]
+**country** | **string** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -16,8 +19,11 @@ import { User } from './api';
 
 const instance: User = {
     _id,
-    username,
+    email,
+    name,
     password,
+    phonenumber,
+    country,
 };
 ```
 
