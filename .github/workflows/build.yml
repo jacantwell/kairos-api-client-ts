@@ -12,6 +12,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
+          token: ${{ secrets.KAIROS_API_CLIENT_TS_PAT }}
           ref: main
           fetch-depth: 0
 
@@ -38,12 +39,13 @@ jobs:
 
       - name: Build package
         run: npm run build
-
+    
+    
       - name: Commit and push changes
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add .
           git commit -m "chore: regenerate OpenAPI client (v${{ github.event.client_payload.version }})" || echo "No changes to commit"
-          git push https://x-access-token:${{ secrets.KAIROS_API_CLIENT_TS_PAT }}@github.com/jacantwell/kairos-api-client-ts.git main
+          git push origin main
 
