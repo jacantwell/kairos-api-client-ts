@@ -45,6 +45,5 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add .
           git commit -m "chore: regenerate OpenAPI client (v${{ github.event.client_payload.version }})" || echo "No changes to commit"
-          git push origin main
-        env:
-          GITHUB_TOKEN: ${{ secrets.KAIROS_API_CLIENT_TS_PAT }}
+          git push https://x-access-token:${{ secrets.KAIROS_API_CLIENT_TS_PAT }}@github.com/jacantwell/kairos-api-client-ts.git main
+
