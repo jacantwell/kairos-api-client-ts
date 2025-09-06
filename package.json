@@ -1,6 +1,6 @@
 {
-  "name": "@jacantwell/kairos-api-client-ts",
-  "version": "1.0.1",
+  "name": "kairos-api-client-ts",
+  "version": "0.0.1",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
