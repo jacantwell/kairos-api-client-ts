@@ -312,6 +312,23 @@ export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) 
     registerUserApiV1UsersRegisterPost: (user: User, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      *
+     * @summary Reset Password
+     * @param {string} email
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    resetPasswordApiV1UsersResetPasswordPost: (email: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @summary Update Password
+     * @param {string} token
+     * @param {string} newPassword
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    updatePasswordApiV1UsersUpdatePasswordPost: (token: string, newPassword: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
      * @summary Verify Email
      * @param {string} token
      * @param {*} [options] Override http request option.
@@ -341,6 +358,23 @@ export declare const UsersApiFp: (configuration?: Configuration) => {
     registerUserApiV1UsersRegisterPost(user: User, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>>;
     /**
      *
+     * @summary Reset Password
+     * @param {string} email
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    resetPasswordApiV1UsersResetPasswordPost(email: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>>;
+    /**
+     *
+     * @summary Update Password
+     * @param {string} token
+     * @param {string} newPassword
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    updatePasswordApiV1UsersUpdatePasswordPost(token: string, newPassword: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>>;
+    /**
+     *
      * @summary Verify Email
      * @param {string} token
      * @param {*} [options] Override http request option.
@@ -368,6 +402,23 @@ export declare const UsersApiFactory: (configuration?: Configuration, basePath?:
      * @throws {RequiredError}
      */
     registerUserApiV1UsersRegisterPost(user: User, options?: RawAxiosRequestConfig): AxiosPromise<any>;
+    /**
+     *
+     * @summary Reset Password
+     * @param {string} email
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    resetPasswordApiV1UsersResetPasswordPost(email: string, options?: RawAxiosRequestConfig): AxiosPromise<any>;
+    /**
+     *
+     * @summary Update Password
+     * @param {string} token
+     * @param {string} newPassword
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    updatePasswordApiV1UsersUpdatePasswordPost(token: string, newPassword: string, options?: RawAxiosRequestConfig): AxiosPromise<any>;
     /**
      *
      * @summary Verify Email
@@ -401,6 +452,25 @@ export declare class UsersApi extends BaseAPI {
      * @memberof UsersApi
      */
     registerUserApiV1UsersRegisterPost(user: User, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<any, any>>;
+    /**
+     *
+     * @summary Reset Password
+     * @param {string} email
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    resetPasswordApiV1UsersResetPasswordPost(email: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<any, any>>;
+    /**
+     *
+     * @summary Update Password
+     * @param {string} token
+     * @param {string} newPassword
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    updatePasswordApiV1UsersUpdatePasswordPost(token: string, newPassword: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<any, any>>;
     /**
      *
      * @summary Verify Email

@@ -385,6 +385,74 @@ const UsersApiAxiosParamCreator = function (configuration) {
         },
         /**
          *
+         * @summary Reset Password
+         * @param {string} email
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        resetPasswordApiV1UsersResetPasswordPost: async (email, options = {}) => {
+            // verify required parameter 'email' is not null or undefined
+            (0, common_1.assertParamExists)('resetPasswordApiV1UsersResetPasswordPost', 'email', email);
+            const localVarPath = `/api/v1/users/reset-password`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            if (email !== undefined) {
+                localVarQueryParameter['email'] = email;
+            }
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary Update Password
+         * @param {string} token
+         * @param {string} newPassword
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updatePasswordApiV1UsersUpdatePasswordPost: async (token, newPassword, options = {}) => {
+            // verify required parameter 'token' is not null or undefined
+            (0, common_1.assertParamExists)('updatePasswordApiV1UsersUpdatePasswordPost', 'token', token);
+            // verify required parameter 'newPassword' is not null or undefined
+            (0, common_1.assertParamExists)('updatePasswordApiV1UsersUpdatePasswordPost', 'newPassword', newPassword);
+            const localVarPath = `/api/v1/users/update-password`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            if (token !== undefined) {
+                localVarQueryParameter['token'] = token;
+            }
+            if (newPassword !== undefined) {
+                localVarQueryParameter['new_password'] = newPassword;
+            }
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
          * @summary Verify Email
          * @param {string} token
          * @param {*} [options] Override http request option.
@@ -453,6 +521,35 @@ const UsersApiFp = function (configuration) {
         },
         /**
          *
+         * @summary Reset Password
+         * @param {string} email
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async resetPasswordApiV1UsersResetPasswordPost(email, options) {
+            var _a, _b, _c;
+            const localVarAxiosArgs = await localVarAxiosParamCreator.resetPasswordApiV1UsersResetPasswordPost(email, options);
+            const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+            const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['UsersApi.resetPasswordApiV1UsersResetPasswordPost']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         *
+         * @summary Update Password
+         * @param {string} token
+         * @param {string} newPassword
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updatePasswordApiV1UsersUpdatePasswordPost(token, newPassword, options) {
+            var _a, _b, _c;
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updatePasswordApiV1UsersUpdatePasswordPost(token, newPassword, options);
+            const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+            const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['UsersApi.updatePasswordApiV1UsersUpdatePasswordPost']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         *
          * @summary Verify Email
          * @param {string} token
          * @param {*} [options] Override http request option.
@@ -496,6 +593,27 @@ const UsersApiFactory = function (configuration, basePath, axios) {
         },
         /**
          *
+         * @summary Reset Password
+         * @param {string} email
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        resetPasswordApiV1UsersResetPasswordPost(email, options) {
+            return localVarFp.resetPasswordApiV1UsersResetPasswordPost(email, options).then((request) => request(axios, basePath));
+        },
+        /**
+         *
+         * @summary Update Password
+         * @param {string} token
+         * @param {string} newPassword
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updatePasswordApiV1UsersUpdatePasswordPost(token, newPassword, options) {
+            return localVarFp.updatePasswordApiV1UsersUpdatePasswordPost(token, newPassword, options).then((request) => request(axios, basePath));
+        },
+        /**
+         *
          * @summary Verify Email
          * @param {string} token
          * @param {*} [options] Override http request option.
@@ -534,6 +652,29 @@ class UsersApi extends base_1.BaseAPI {
      */
     registerUserApiV1UsersRegisterPost(user, options) {
         return (0, exports.UsersApiFp)(this.configuration).registerUserApiV1UsersRegisterPost(user, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     *
+     * @summary Reset Password
+     * @param {string} email
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    resetPasswordApiV1UsersResetPasswordPost(email, options) {
+        return (0, exports.UsersApiFp)(this.configuration).resetPasswordApiV1UsersResetPasswordPost(email, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     *
+     * @summary Update Password
+     * @param {string} token
+     * @param {string} newPassword
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    updatePasswordApiV1UsersUpdatePasswordPost(token, newPassword, options) {
+        return (0, exports.UsersApiFp)(this.configuration).updatePasswordApiV1UsersUpdatePasswordPost(token, newPassword, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      *
