@@ -37,7 +37,7 @@ exports.MarkerMarkerTypeEnum = {
 const AuthenticationApiAxiosParamCreator = function (configuration) {
     return {
         /**
-         * Authenticate a user and return an access token.
+         * Authenticate a user via their password and return an access token adn refresh token.
          * @summary Login
          * @param {string} username
          * @param {string} password
@@ -92,6 +92,37 @@ const AuthenticationApiAxiosParamCreator = function (configuration) {
                 options: localVarRequestOptions,
             };
         },
+        /**
+         *
+         * @summary Refresh
+         * @param {string} refreshToken
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        refreshApiV1AuthRefreshPost: async (refreshToken, options = {}) => {
+            // verify required parameter 'refreshToken' is not null or undefined
+            (0, common_1.assertParamExists)('refreshApiV1AuthRefreshPost', 'refreshToken', refreshToken);
+            const localVarPath = `/api/v1/auth/refresh`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            if (refreshToken !== undefined) {
+                localVarQueryParameter['refresh_token'] = refreshToken;
+            }
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     };
 };
 exports.AuthenticationApiAxiosParamCreator = AuthenticationApiAxiosParamCreator;
@@ -103,7 +134,7 @@ const AuthenticationApiFp = function (configuration) {
     const localVarAxiosParamCreator = (0, exports.AuthenticationApiAxiosParamCreator)(configuration);
     return {
         /**
-         * Authenticate a user and return an access token.
+         * Authenticate a user via their password and return an access token adn refresh token.
          * @summary Login
          * @param {string} username
          * @param {string} password
@@ -121,6 +152,20 @@ const AuthenticationApiFp = function (configuration) {
             const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['AuthenticationApi.loginApiV1AuthTokenPost']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
             return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         *
+         * @summary Refresh
+         * @param {string} refreshToken
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async refreshApiV1AuthRefreshPost(refreshToken, options) {
+            var _a, _b, _c;
+            const localVarAxiosArgs = await localVarAxiosParamCreator.refreshApiV1AuthRefreshPost(refreshToken, options);
+            const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+            const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['AuthenticationApi.refreshApiV1AuthRefreshPost']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     };
 };
 exports.AuthenticationApiFp = AuthenticationApiFp;
@@ -132,7 +177,7 @@ const AuthenticationApiFactory = function (configuration, basePath, axios) {
     const localVarFp = (0, exports.AuthenticationApiFp)(configuration);
     return {
         /**
-         * Authenticate a user and return an access token.
+         * Authenticate a user via their password and return an access token adn refresh token.
          * @summary Login
          * @param {string} username
          * @param {string} password
@@ -146,6 +191,16 @@ const AuthenticationApiFactory = function (configuration, basePath, axios) {
         loginApiV1AuthTokenPost(username, password, grantType, scope, clientId, clientSecret, options) {
             return localVarFp.loginApiV1AuthTokenPost(username, password, grantType, scope, clientId, clientSecret, options).then((request) => request(axios, basePath));
         },
+        /**
+         *
+         * @summary Refresh
+         * @param {string} refreshToken
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        refreshApiV1AuthRefreshPost(refreshToken, options) {
+            return localVarFp.refreshApiV1AuthRefreshPost(refreshToken, options).then((request) => request(axios, basePath));
+        },
     };
 };
 exports.AuthenticationApiFactory = AuthenticationApiFactory;
@@ -157,7 +212,7 @@ exports.AuthenticationApiFactory = AuthenticationApiFactory;
  */
 class AuthenticationApi extends base_1.BaseAPI {
     /**
-     * Authenticate a user and return an access token.
+     * Authenticate a user via their password and return an access token adn refresh token.
      * @summary Login
      * @param {string} username
      * @param {string} password
@@ -171,6 +226,17 @@ class AuthenticationApi extends base_1.BaseAPI {
      */
     loginApiV1AuthTokenPost(username, password, grantType, scope, clientId, clientSecret, options) {
         return (0, exports.AuthenticationApiFp)(this.configuration).loginApiV1AuthTokenPost(username, password, grantType, scope, clientId, clientSecret, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     *
+     * @summary Refresh
+     * @param {string} refreshToken
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthenticationApi
+     */
+    refreshApiV1AuthRefreshPost(refreshToken, options) {
+        return (0, exports.AuthenticationApiFp)(this.configuration).refreshApiV1AuthRefreshPost(refreshToken, options).then((request) => request(this.axios, this.basePath));
     }
 }
 exports.AuthenticationApi = AuthenticationApi;

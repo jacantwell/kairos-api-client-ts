@@ -156,19 +156,25 @@ export type MarkerMarkerTypeEnum = typeof MarkerMarkerTypeEnum[keyof typeof Mark
 /**
  *
  * @export
- * @interface Token
+ * @interface Tokens
  */
-export interface Token {
+export interface Tokens {
     /**
      *
      * @type {string}
-     * @memberof Token
+     * @memberof Tokens
      */
     'access_token': string;
     /**
      *
      * @type {string}
-     * @memberof Token
+     * @memberof Tokens
+     */
+    'refresh_token': string;
+    /**
+     *
+     * @type {string}
+     * @memberof Tokens
      */
     'token_type'?: string;
 }
@@ -259,7 +265,7 @@ export interface ValidationErrorLocInner {
  */
 export declare const AuthenticationApiAxiosParamCreator: (configuration?: Configuration) => {
     /**
-     * Authenticate a user and return an access token.
+     * Authenticate a user via their password and return an access token adn refresh token.
      * @summary Login
      * @param {string} username
      * @param {string} password
@@ -271,6 +277,14 @@ export declare const AuthenticationApiAxiosParamCreator: (configuration?: Config
      * @throws {RequiredError}
      */
     loginApiV1AuthTokenPost: (username: string, password: string, grantType?: string | null, scope?: string, clientId?: string | null, clientSecret?: string | null, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @summary Refresh
+     * @param {string} refreshToken
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    refreshApiV1AuthRefreshPost: (refreshToken: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
  * AuthenticationApi - functional programming interface
@@ -278,7 +292,7 @@ export declare const AuthenticationApiAxiosParamCreator: (configuration?: Config
  */
 export declare const AuthenticationApiFp: (configuration?: Configuration) => {
     /**
-     * Authenticate a user and return an access token.
+     * Authenticate a user via their password and return an access token adn refresh token.
      * @summary Login
      * @param {string} username
      * @param {string} password
@@ -289,7 +303,15 @@ export declare const AuthenticationApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    loginApiV1AuthTokenPost(username: string, password: string, grantType?: string | null, scope?: string, clientId?: string | null, clientSecret?: string | null, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Token>>;
+    loginApiV1AuthTokenPost(username: string, password: string, grantType?: string | null, scope?: string, clientId?: string | null, clientSecret?: string | null, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Tokens>>;
+    /**
+     *
+     * @summary Refresh
+     * @param {string} refreshToken
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    refreshApiV1AuthRefreshPost(refreshToken: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>>;
 };
 /**
  * AuthenticationApi - factory interface
@@ -297,7 +319,7 @@ export declare const AuthenticationApiFp: (configuration?: Configuration) => {
  */
 export declare const AuthenticationApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
     /**
-     * Authenticate a user and return an access token.
+     * Authenticate a user via their password and return an access token adn refresh token.
      * @summary Login
      * @param {string} username
      * @param {string} password
@@ -308,7 +330,15 @@ export declare const AuthenticationApiFactory: (configuration?: Configuration, b
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    loginApiV1AuthTokenPost(username: string, password: string, grantType?: string | null, scope?: string, clientId?: string | null, clientSecret?: string | null, options?: RawAxiosRequestConfig): AxiosPromise<Token>;
+    loginApiV1AuthTokenPost(username: string, password: string, grantType?: string | null, scope?: string, clientId?: string | null, clientSecret?: string | null, options?: RawAxiosRequestConfig): AxiosPromise<Tokens>;
+    /**
+     *
+     * @summary Refresh
+     * @param {string} refreshToken
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    refreshApiV1AuthRefreshPost(refreshToken: string, options?: RawAxiosRequestConfig): AxiosPromise<any>;
 };
 /**
  * AuthenticationApi - object-oriented interface
@@ -318,7 +348,7 @@ export declare const AuthenticationApiFactory: (configuration?: Configuration, b
  */
 export declare class AuthenticationApi extends BaseAPI {
     /**
-     * Authenticate a user and return an access token.
+     * Authenticate a user via their password and return an access token adn refresh token.
      * @summary Login
      * @param {string} username
      * @param {string} password
@@ -330,7 +360,16 @@ export declare class AuthenticationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AuthenticationApi
      */
-    loginApiV1AuthTokenPost(username: string, password: string, grantType?: string | null, scope?: string, clientId?: string | null, clientSecret?: string | null, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<Token, any>>;
+    loginApiV1AuthTokenPost(username: string, password: string, grantType?: string | null, scope?: string, clientId?: string | null, clientSecret?: string | null, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<Tokens, any>>;
+    /**
+     *
+     * @summary Refresh
+     * @param {string} refreshToken
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthenticationApi
+     */
+    refreshApiV1AuthRefreshPost(refreshToken: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<any, any>>;
 }
 /**
  * DefaultApi - axios parameter creator
