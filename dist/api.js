@@ -400,6 +400,38 @@ const JourneysApiAxiosParamCreator = function (configuration) {
             };
         },
         /**
+         *
+         * @summary Delete Journey
+         * @param {string} journeyId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteJourneyApiV1JourneysJourneyIdDelete: async (journeyId, options = {}) => {
+            // verify required parameter 'journeyId' is not null or undefined
+            (0, common_1.assertParamExists)('deleteJourneyApiV1JourneysJourneyIdDelete', 'journeyId', journeyId);
+            const localVarPath = `/api/v1/journeys/{journey_id}`
+                .replace(`{${"journey_id"}}`, encodeURIComponent(String(journeyId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication OAuth2PasswordBearer required
+            // oauth required
+            await (0, common_1.setOAuthToObject)(localVarHeaderParameter, "OAuth2PasswordBearer", [], configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Get a journey by ID.
          * @summary Get Journey
          * @param {string} journeyId
@@ -535,6 +567,20 @@ const JourneysApiFp = function (configuration) {
             return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         *
+         * @summary Delete Journey
+         * @param {string} journeyId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteJourneyApiV1JourneysJourneyIdDelete(journeyId, options) {
+            var _a, _b, _c;
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteJourneyApiV1JourneysJourneyIdDelete(journeyId, options);
+            const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+            const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['JourneysApi.deleteJourneyApiV1JourneysJourneyIdDelete']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Get a journey by ID.
          * @summary Get Journey
          * @param {string} journeyId
@@ -608,6 +654,16 @@ const JourneysApiFactory = function (configuration, basePath, axios) {
             return localVarFp.createJourneyApiV1JourneysPost(journey, options).then((request) => request(axios, basePath));
         },
         /**
+         *
+         * @summary Delete Journey
+         * @param {string} journeyId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteJourneyApiV1JourneysJourneyIdDelete(journeyId, options) {
+            return localVarFp.deleteJourneyApiV1JourneysJourneyIdDelete(journeyId, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Get a journey by ID.
          * @summary Get Journey
          * @param {string} journeyId
@@ -669,6 +725,17 @@ class JourneysApi extends base_1.BaseAPI {
      */
     createJourneyApiV1JourneysPost(journey, options) {
         return (0, exports.JourneysApiFp)(this.configuration).createJourneyApiV1JourneysPost(journey, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     *
+     * @summary Delete Journey
+     * @param {string} journeyId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof JourneysApi
+     */
+    deleteJourneyApiV1JourneysJourneyIdDelete(journeyId, options) {
+        return (0, exports.JourneysApiFp)(this.configuration).deleteJourneyApiV1JourneysJourneyIdDelete(journeyId, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Get a journey by ID.

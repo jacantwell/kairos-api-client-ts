@@ -6,6 +6,7 @@ All URIs are relative to *http://localhost*
 |------------- | ------------- | -------------|
 |[**addMarkerToJourneyApiV1JourneysJourneyIdMarkersPost**](#addmarkertojourneyapiv1journeysjourneyidmarkerspost) | **POST** /api/v1/journeys/{journey_id}/markers | Add Marker To Journey|
 |[**createJourneyApiV1JourneysPost**](#createjourneyapiv1journeyspost) | **POST** /api/v1/journeys/ | Create Journey|
+|[**deleteJourneyApiV1JourneysJourneyIdDelete**](#deletejourneyapiv1journeysjourneyiddelete) | **DELETE** /api/v1/journeys/{journey_id} | Delete Journey|
 |[**getJourneyApiV1JourneysJourneyIdGet**](#getjourneyapiv1journeysjourneyidget) | **GET** /api/v1/journeys/{journey_id} | Get Journey|
 |[**getJourneyMarkersApiV1JourneysJourneyIdMarkersGet**](#getjourneymarkersapiv1journeysjourneyidmarkersget) | **GET** /api/v1/journeys/{journey_id}/markers | Get Journey Markers|
 |[**getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet**](#getnearbyjourneysapiv1journeysjourneyidjourneysnearbyget) | **GET** /api/v1/journeys/{journey_id}/journeys/nearby | Get Nearby Journeys|
@@ -108,6 +109,57 @@ const { status, data } = await apiInstance.createJourneyApiV1JourneysPost(
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Successful Response |  -  |
+|**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **deleteJourneyApiV1JourneysJourneyIdDelete**
+> any deleteJourneyApiV1JourneysJourneyIdDelete()
+
+
+### Example
+
+```typescript
+import {
+    JourneysApi,
+    Configuration
+} from './api';
+
+const configuration = new Configuration();
+const apiInstance = new JourneysApi(configuration);
+
+let journeyId: string; // (default to undefined)
+
+const { status, data } = await apiInstance.deleteJourneyApiV1JourneysJourneyIdDelete(
+    journeyId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **journeyId** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+**any**
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 

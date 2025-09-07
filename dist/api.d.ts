@@ -439,6 +439,14 @@ export declare const JourneysApiAxiosParamCreator: (configuration?: Configuratio
      */
     createJourneyApiV1JourneysPost: (journey: Journey, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     *
+     * @summary Delete Journey
+     * @param {string} journeyId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    deleteJourneyApiV1JourneysJourneyIdDelete: (journeyId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * Get a journey by ID.
      * @summary Get Journey
      * @param {string} journeyId
@@ -486,6 +494,14 @@ export declare const JourneysApiFp: (configuration?: Configuration) => {
      */
     createJourneyApiV1JourneysPost(journey: Journey, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Journey>>;
     /**
+     *
+     * @summary Delete Journey
+     * @param {string} journeyId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    deleteJourneyApiV1JourneysJourneyIdDelete(journeyId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>>;
+    /**
      * Get a journey by ID.
      * @summary Get Journey
      * @param {string} journeyId
@@ -532,6 +548,14 @@ export declare const JourneysApiFactory: (configuration?: Configuration, basePat
      * @throws {RequiredError}
      */
     createJourneyApiV1JourneysPost(journey: Journey, options?: RawAxiosRequestConfig): AxiosPromise<Journey>;
+    /**
+     *
+     * @summary Delete Journey
+     * @param {string} journeyId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    deleteJourneyApiV1JourneysJourneyIdDelete(journeyId: string, options?: RawAxiosRequestConfig): AxiosPromise<any>;
     /**
      * Get a journey by ID.
      * @summary Get Journey
@@ -583,6 +607,15 @@ export declare class JourneysApi extends BaseAPI {
      * @memberof JourneysApi
      */
     createJourneyApiV1JourneysPost(journey: Journey, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<Journey, any>>;
+    /**
+     *
+     * @summary Delete Journey
+     * @param {string} journeyId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof JourneysApi
+     */
+    deleteJourneyApiV1JourneysJourneyIdDelete(journeyId: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<any, any>>;
     /**
      * Get a journey by ID.
      * @summary Get Journey
