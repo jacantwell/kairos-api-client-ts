@@ -5,8 +5,12 @@ base.ts
 common.ts
 configuration.ts
 docs/AuthenticationApi.md
+docs/Coordinates.md
 docs/DefaultApi.md
 docs/HTTPValidationError.md
+docs/Journey.md
+docs/JourneysApi.md
+docs/Marker.md
 docs/Token.md
 docs/User.md
 docs/UsersApi.md

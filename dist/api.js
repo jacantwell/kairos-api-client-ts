@@ -16,13 +16,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UsersApi = exports.UsersApiFactory = exports.UsersApiFp = exports.UsersApiAxiosParamCreator = exports.DefaultApi = exports.DefaultApiFactory = exports.DefaultApiFp = exports.DefaultApiAxiosParamCreator = exports.AuthenticationApi = exports.AuthenticationApiFactory = exports.AuthenticationApiFp = exports.AuthenticationApiAxiosParamCreator = void 0;
+exports.UsersApi = exports.UsersApiFactory = exports.UsersApiFp = exports.UsersApiAxiosParamCreator = exports.JourneysApi = exports.JourneysApiFactory = exports.JourneysApiFp = exports.JourneysApiAxiosParamCreator = exports.DefaultApi = exports.DefaultApiFactory = exports.DefaultApiFp = exports.DefaultApiAxiosParamCreator = exports.AuthenticationApi = exports.AuthenticationApiFactory = exports.AuthenticationApiFp = exports.AuthenticationApiAxiosParamCreator = exports.MarkerMarkerTypeEnum = exports.CoordinatesTypeEnum = void 0;
 const axios_1 = __importDefault(require("axios"));
 // Some imports not used depending on template conditions
 // @ts-ignore
 const common_1 = require("./common");
 // @ts-ignore
 const base_1 = require("./base");
+exports.CoordinatesTypeEnum = {
+    Point: 'Point'
+};
+exports.MarkerMarkerTypeEnum = {
+    Past: 'past',
+    Plan: 'plan'
+};
 /**
  * AuthenticationApi - axios parameter creator
  * @export
@@ -320,6 +327,385 @@ class DefaultApi extends base_1.BaseAPI {
 }
 exports.DefaultApi = DefaultApi;
 /**
+ * JourneysApi - axios parameter creator
+ * @export
+ */
+const JourneysApiAxiosParamCreator = function (configuration) {
+    return {
+        /**
+         * Add a marker to a journey.
+         * @summary Add Marker To Journey
+         * @param {string} journeyId
+         * @param {Marker} marker
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        addMarkerToJourneyApiV1JourneysJourneyIdMarkersPost: async (journeyId, marker, options = {}) => {
+            // verify required parameter 'journeyId' is not null or undefined
+            (0, common_1.assertParamExists)('addMarkerToJourneyApiV1JourneysJourneyIdMarkersPost', 'journeyId', journeyId);
+            // verify required parameter 'marker' is not null or undefined
+            (0, common_1.assertParamExists)('addMarkerToJourneyApiV1JourneysJourneyIdMarkersPost', 'marker', marker);
+            const localVarPath = `/api/v1/journeys/{journey_id}/markers`
+                .replace(`{${"journey_id"}}`, encodeURIComponent(String(journeyId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(marker, localVarRequestOptions, configuration);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Register a new journey.
+         * @summary Create Journey
+         * @param {Journey} journey
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createJourneyApiV1JourneysPost: async (journey, options = {}) => {
+            // verify required parameter 'journey' is not null or undefined
+            (0, common_1.assertParamExists)('createJourneyApiV1JourneysPost', 'journey', journey);
+            const localVarPath = `/api/v1/journeys/`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication OAuth2PasswordBearer required
+            // oauth required
+            await (0, common_1.setOAuthToObject)(localVarHeaderParameter, "OAuth2PasswordBearer", [], configuration);
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(journey, localVarRequestOptions, configuration);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get a journey by ID.
+         * @summary Get Journey
+         * @param {string} journeyId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getJourneyApiV1JourneysJourneyIdGet: async (journeyId, options = {}) => {
+            // verify required parameter 'journeyId' is not null or undefined
+            (0, common_1.assertParamExists)('getJourneyApiV1JourneysJourneyIdGet', 'journeyId', journeyId);
+            const localVarPath = `/api/v1/journeys/{journey_id}`
+                .replace(`{${"journey_id"}}`, encodeURIComponent(String(journeyId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication OAuth2PasswordBearer required
+            // oauth required
+            await (0, common_1.setOAuthToObject)(localVarHeaderParameter, "OAuth2PasswordBearer", [], configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get all markers for a journey.
+         * @summary Get Journey Markers
+         * @param {string} journeyId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getJourneyMarkersApiV1JourneysJourneyIdMarkersGet: async (journeyId, options = {}) => {
+            // verify required parameter 'journeyId' is not null or undefined
+            (0, common_1.assertParamExists)('getJourneyMarkersApiV1JourneysJourneyIdMarkersGet', 'journeyId', journeyId);
+            const localVarPath = `/api/v1/journeys/{journey_id}/markers`
+                .replace(`{${"journey_id"}}`, encodeURIComponent(String(journeyId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication OAuth2PasswordBearer required
+            // oauth required
+            await (0, common_1.setOAuthToObject)(localVarHeaderParameter, "OAuth2PasswordBearer", [], configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get all journeys with markers near the markers of a given journey.
+         * @summary Get Nearby Journeys
+         * @param {string} journeyId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet: async (journeyId, options = {}) => {
+            // verify required parameter 'journeyId' is not null or undefined
+            (0, common_1.assertParamExists)('getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet', 'journeyId', journeyId);
+            const localVarPath = `/api/v1/journeys/{journey_id}/journeys/nearby`
+                .replace(`{${"journey_id"}}`, encodeURIComponent(String(journeyId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication OAuth2PasswordBearer required
+            // oauth required
+            await (0, common_1.setOAuthToObject)(localVarHeaderParameter, "OAuth2PasswordBearer", [], configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    };
+};
+exports.JourneysApiAxiosParamCreator = JourneysApiAxiosParamCreator;
+/**
+ * JourneysApi - functional programming interface
+ * @export
+ */
+const JourneysApiFp = function (configuration) {
+    const localVarAxiosParamCreator = (0, exports.JourneysApiAxiosParamCreator)(configuration);
+    return {
+        /**
+         * Add a marker to a journey.
+         * @summary Add Marker To Journey
+         * @param {string} journeyId
+         * @param {Marker} marker
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async addMarkerToJourneyApiV1JourneysJourneyIdMarkersPost(journeyId, marker, options) {
+            var _a, _b, _c;
+            const localVarAxiosArgs = await localVarAxiosParamCreator.addMarkerToJourneyApiV1JourneysJourneyIdMarkersPost(journeyId, marker, options);
+            const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+            const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['JourneysApi.addMarkerToJourneyApiV1JourneysJourneyIdMarkersPost']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Register a new journey.
+         * @summary Create Journey
+         * @param {Journey} journey
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createJourneyApiV1JourneysPost(journey, options) {
+            var _a, _b, _c;
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createJourneyApiV1JourneysPost(journey, options);
+            const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+            const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['JourneysApi.createJourneyApiV1JourneysPost']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Get a journey by ID.
+         * @summary Get Journey
+         * @param {string} journeyId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getJourneyApiV1JourneysJourneyIdGet(journeyId, options) {
+            var _a, _b, _c;
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getJourneyApiV1JourneysJourneyIdGet(journeyId, options);
+            const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+            const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['JourneysApi.getJourneyApiV1JourneysJourneyIdGet']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Get all markers for a journey.
+         * @summary Get Journey Markers
+         * @param {string} journeyId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getJourneyMarkersApiV1JourneysJourneyIdMarkersGet(journeyId, options) {
+            var _a, _b, _c;
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getJourneyMarkersApiV1JourneysJourneyIdMarkersGet(journeyId, options);
+            const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+            const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['JourneysApi.getJourneyMarkersApiV1JourneysJourneyIdMarkersGet']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Get all journeys with markers near the markers of a given journey.
+         * @summary Get Nearby Journeys
+         * @param {string} journeyId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId, options) {
+            var _a, _b, _c;
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId, options);
+            const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+            const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['JourneysApi.getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    };
+};
+exports.JourneysApiFp = JourneysApiFp;
+/**
+ * JourneysApi - factory interface
+ * @export
+ */
+const JourneysApiFactory = function (configuration, basePath, axios) {
+    const localVarFp = (0, exports.JourneysApiFp)(configuration);
+    return {
+        /**
+         * Add a marker to a journey.
+         * @summary Add Marker To Journey
+         * @param {string} journeyId
+         * @param {Marker} marker
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        addMarkerToJourneyApiV1JourneysJourneyIdMarkersPost(journeyId, marker, options) {
+            return localVarFp.addMarkerToJourneyApiV1JourneysJourneyIdMarkersPost(journeyId, marker, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Register a new journey.
+         * @summary Create Journey
+         * @param {Journey} journey
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createJourneyApiV1JourneysPost(journey, options) {
+            return localVarFp.createJourneyApiV1JourneysPost(journey, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Get a journey by ID.
+         * @summary Get Journey
+         * @param {string} journeyId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getJourneyApiV1JourneysJourneyIdGet(journeyId, options) {
+            return localVarFp.getJourneyApiV1JourneysJourneyIdGet(journeyId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Get all markers for a journey.
+         * @summary Get Journey Markers
+         * @param {string} journeyId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getJourneyMarkersApiV1JourneysJourneyIdMarkersGet(journeyId, options) {
+            return localVarFp.getJourneyMarkersApiV1JourneysJourneyIdMarkersGet(journeyId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Get all journeys with markers near the markers of a given journey.
+         * @summary Get Nearby Journeys
+         * @param {string} journeyId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId, options) {
+            return localVarFp.getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+exports.JourneysApiFactory = JourneysApiFactory;
+/**
+ * JourneysApi - object-oriented interface
+ * @export
+ * @class JourneysApi
+ * @extends {BaseAPI}
+ */
+class JourneysApi extends base_1.BaseAPI {
+    /**
+     * Add a marker to a journey.
+     * @summary Add Marker To Journey
+     * @param {string} journeyId
+     * @param {Marker} marker
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof JourneysApi
+     */
+    addMarkerToJourneyApiV1JourneysJourneyIdMarkersPost(journeyId, marker, options) {
+        return (0, exports.JourneysApiFp)(this.configuration).addMarkerToJourneyApiV1JourneysJourneyIdMarkersPost(journeyId, marker, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Register a new journey.
+     * @summary Create Journey
+     * @param {Journey} journey
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof JourneysApi
+     */
+    createJourneyApiV1JourneysPost(journey, options) {
+        return (0, exports.JourneysApiFp)(this.configuration).createJourneyApiV1JourneysPost(journey, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Get a journey by ID.
+     * @summary Get Journey
+     * @param {string} journeyId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof JourneysApi
+     */
+    getJourneyApiV1JourneysJourneyIdGet(journeyId, options) {
+        return (0, exports.JourneysApiFp)(this.configuration).getJourneyApiV1JourneysJourneyIdGet(journeyId, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Get all markers for a journey.
+     * @summary Get Journey Markers
+     * @param {string} journeyId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof JourneysApi
+     */
+    getJourneyMarkersApiV1JourneysJourneyIdMarkersGet(journeyId, options) {
+        return (0, exports.JourneysApiFp)(this.configuration).getJourneyMarkersApiV1JourneysJourneyIdMarkersGet(journeyId, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Get all journeys with markers near the markers of a given journey.
+     * @summary Get Nearby Journeys
+     * @param {string} journeyId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof JourneysApi
+     */
+    getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId, options) {
+        return (0, exports.JourneysApiFp)(this.configuration).getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+exports.JourneysApi = JourneysApi;
+/**
  * UsersApi - axios parameter creator
  * @export
  */
@@ -333,6 +719,70 @@ const UsersApiAxiosParamCreator = function (configuration) {
          */
         getCurrentUserApiV1UsersMeGet: async (options = {}) => {
             const localVarPath = `/api/v1/users/me`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication OAuth2PasswordBearer required
+            // oauth required
+            await (0, common_1.setOAuthToObject)(localVarHeaderParameter, "OAuth2PasswordBearer", [], configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get a user by ID.
+         * @summary Get User By Id
+         * @param {string} userId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUserByIdApiV1UsersUserIdGet: async (userId, options = {}) => {
+            // verify required parameter 'userId' is not null or undefined
+            (0, common_1.assertParamExists)('getUserByIdApiV1UsersUserIdGet', 'userId', userId);
+            const localVarPath = `/api/v1/users/{user_id}`
+                .replace(`{${"user_id"}}`, encodeURIComponent(String(userId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication OAuth2PasswordBearer required
+            // oauth required
+            await (0, common_1.setOAuthToObject)(localVarHeaderParameter, "OAuth2PasswordBearer", [], configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get journeys for a specific user.
+         * @summary Get User Journeys
+         * @param {string} userId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUserJourneysApiV1UsersUserIdJourneysGet: async (userId, options = {}) => {
+            // verify required parameter 'userId' is not null or undefined
+            (0, common_1.assertParamExists)('getUserJourneysApiV1UsersUserIdJourneysGet', 'userId', userId);
+            const localVarPath = `/api/v1/users/{user_id}/journeys`
+                .replace(`{${"user_id"}}`, encodeURIComponent(String(userId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
             let baseOptions;
@@ -506,6 +956,34 @@ const UsersApiFp = function (configuration) {
             return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Get a user by ID.
+         * @summary Get User By Id
+         * @param {string} userId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getUserByIdApiV1UsersUserIdGet(userId, options) {
+            var _a, _b, _c;
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserByIdApiV1UsersUserIdGet(userId, options);
+            const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+            const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['UsersApi.getUserByIdApiV1UsersUserIdGet']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Get journeys for a specific user.
+         * @summary Get User Journeys
+         * @param {string} userId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getUserJourneysApiV1UsersUserIdJourneysGet(userId, options) {
+            var _a, _b, _c;
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserJourneysApiV1UsersUserIdJourneysGet(userId, options);
+            const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+            const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['UsersApi.getUserJourneysApiV1UsersUserIdJourneysGet']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Register a new user.
          * @summary Register User
          * @param {User} user
@@ -582,6 +1060,26 @@ const UsersApiFactory = function (configuration, basePath, axios) {
             return localVarFp.getCurrentUserApiV1UsersMeGet(options).then((request) => request(axios, basePath));
         },
         /**
+         * Get a user by ID.
+         * @summary Get User By Id
+         * @param {string} userId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUserByIdApiV1UsersUserIdGet(userId, options) {
+            return localVarFp.getUserByIdApiV1UsersUserIdGet(userId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Get journeys for a specific user.
+         * @summary Get User Journeys
+         * @param {string} userId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUserJourneysApiV1UsersUserIdJourneysGet(userId, options) {
+            return localVarFp.getUserJourneysApiV1UsersUserIdJourneysGet(userId, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Register a new user.
          * @summary Register User
          * @param {User} user
@@ -641,6 +1139,28 @@ class UsersApi extends base_1.BaseAPI {
      */
     getCurrentUserApiV1UsersMeGet(options) {
         return (0, exports.UsersApiFp)(this.configuration).getCurrentUserApiV1UsersMeGet(options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Get a user by ID.
+     * @summary Get User By Id
+     * @param {string} userId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    getUserByIdApiV1UsersUserIdGet(userId, options) {
+        return (0, exports.UsersApiFp)(this.configuration).getUserByIdApiV1UsersUserIdGet(userId, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Get journeys for a specific user.
+     * @summary Get User Journeys
+     * @param {string} userId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    getUserJourneysApiV1UsersUserIdJourneysGet(userId, options) {
+        return (0, exports.UsersApiFp)(this.configuration).getUserJourneysApiV1UsersUserIdJourneysGet(userId, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Register a new user.

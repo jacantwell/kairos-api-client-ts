@@ -17,6 +17,29 @@ import { BaseAPI } from './base';
 /**
  *
  * @export
+ * @interface Coordinates
+ */
+export interface Coordinates {
+    /**
+     *
+     * @type {string}
+     * @memberof Coordinates
+     */
+    'type'?: CoordinatesTypeEnum;
+    /**
+     *
+     * @type {Array<number>}
+     * @memberof Coordinates
+     */
+    'coordinates': Array<number>;
+}
+export declare const CoordinatesTypeEnum: {
+    readonly Point: "Point";
+};
+export type CoordinatesTypeEnum = typeof CoordinatesTypeEnum[keyof typeof CoordinatesTypeEnum];
+/**
+ *
+ * @export
  * @interface HTTPValidationError
  */
 export interface HTTPValidationError {
@@ -27,6 +50,109 @@ export interface HTTPValidationError {
      */
     'detail'?: Array<ValidationError>;
 }
+/**
+ *
+ * @export
+ * @interface Journey
+ */
+export interface Journey {
+    /**
+     *
+     * @type {string}
+     * @memberof Journey
+     */
+    '_id'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof Journey
+     */
+    'name': string;
+    /**
+     *
+     * @type {string}
+     * @memberof Journey
+     */
+    'description'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Journey
+     */
+    'user_id': string;
+    /**
+     *
+     * @type {string}
+     * @memberof Journey
+     */
+    'created_at'?: string;
+    /**
+     *
+     * @type {boolean}
+     * @memberof Journey
+     */
+    'active': boolean;
+}
+/**
+ *
+ * @export
+ * @interface Marker
+ */
+export interface Marker {
+    /**
+     *
+     * @type {string}
+     * @memberof Marker
+     */
+    '_id'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof Marker
+     */
+    'journey_id': string;
+    /**
+     *
+     * @type {string}
+     * @memberof Marker
+     */
+    'marker_type': MarkerMarkerTypeEnum;
+    /**
+     *
+     * @type {Coordinates}
+     * @memberof Marker
+     */
+    'coordinates': Coordinates;
+    /**
+     *
+     * @type {string}
+     * @memberof Marker
+     */
+    'timestamp'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof Marker
+     */
+    'estimated_time'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof Marker
+     */
+    'notes'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Marker
+     */
+    'created_at'?: string;
+}
+export declare const MarkerMarkerTypeEnum: {
+    readonly Past: "past";
+    readonly Plan: "plan";
+};
+export type MarkerMarkerTypeEnum = typeof MarkerMarkerTypeEnum[keyof typeof MarkerMarkerTypeEnum];
 /**
  *
  * @export
@@ -291,6 +417,201 @@ export declare class DefaultApi extends BaseAPI {
     pingMongodbApiV1MongodbGet(options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<any, any>>;
 }
 /**
+ * JourneysApi - axios parameter creator
+ * @export
+ */
+export declare const JourneysApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     * Add a marker to a journey.
+     * @summary Add Marker To Journey
+     * @param {string} journeyId
+     * @param {Marker} marker
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    addMarkerToJourneyApiV1JourneysJourneyIdMarkersPost: (journeyId: string, marker: Marker, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Register a new journey.
+     * @summary Create Journey
+     * @param {Journey} journey
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    createJourneyApiV1JourneysPost: (journey: Journey, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Get a journey by ID.
+     * @summary Get Journey
+     * @param {string} journeyId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getJourneyApiV1JourneysJourneyIdGet: (journeyId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Get all markers for a journey.
+     * @summary Get Journey Markers
+     * @param {string} journeyId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getJourneyMarkersApiV1JourneysJourneyIdMarkersGet: (journeyId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Get all journeys with markers near the markers of a given journey.
+     * @summary Get Nearby Journeys
+     * @param {string} journeyId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet: (journeyId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * JourneysApi - functional programming interface
+ * @export
+ */
+export declare const JourneysApiFp: (configuration?: Configuration) => {
+    /**
+     * Add a marker to a journey.
+     * @summary Add Marker To Journey
+     * @param {string} journeyId
+     * @param {Marker} marker
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    addMarkerToJourneyApiV1JourneysJourneyIdMarkersPost(journeyId: string, marker: Marker, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Marker>>;
+    /**
+     * Register a new journey.
+     * @summary Create Journey
+     * @param {Journey} journey
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    createJourneyApiV1JourneysPost(journey: Journey, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Journey>>;
+    /**
+     * Get a journey by ID.
+     * @summary Get Journey
+     * @param {string} journeyId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getJourneyApiV1JourneysJourneyIdGet(journeyId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Journey>>;
+    /**
+     * Get all markers for a journey.
+     * @summary Get Journey Markers
+     * @param {string} journeyId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getJourneyMarkersApiV1JourneysJourneyIdMarkersGet(journeyId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Marker>>>;
+    /**
+     * Get all journeys with markers near the markers of a given journey.
+     * @summary Get Nearby Journeys
+     * @param {string} journeyId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>>;
+};
+/**
+ * JourneysApi - factory interface
+ * @export
+ */
+export declare const JourneysApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     * Add a marker to a journey.
+     * @summary Add Marker To Journey
+     * @param {string} journeyId
+     * @param {Marker} marker
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    addMarkerToJourneyApiV1JourneysJourneyIdMarkersPost(journeyId: string, marker: Marker, options?: RawAxiosRequestConfig): AxiosPromise<Marker>;
+    /**
+     * Register a new journey.
+     * @summary Create Journey
+     * @param {Journey} journey
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    createJourneyApiV1JourneysPost(journey: Journey, options?: RawAxiosRequestConfig): AxiosPromise<Journey>;
+    /**
+     * Get a journey by ID.
+     * @summary Get Journey
+     * @param {string} journeyId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getJourneyApiV1JourneysJourneyIdGet(journeyId: string, options?: RawAxiosRequestConfig): AxiosPromise<Journey>;
+    /**
+     * Get all markers for a journey.
+     * @summary Get Journey Markers
+     * @param {string} journeyId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getJourneyMarkersApiV1JourneysJourneyIdMarkersGet(journeyId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<Marker>>;
+    /**
+     * Get all journeys with markers near the markers of a given journey.
+     * @summary Get Nearby Journeys
+     * @param {string} journeyId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId: string, options?: RawAxiosRequestConfig): AxiosPromise<any>;
+};
+/**
+ * JourneysApi - object-oriented interface
+ * @export
+ * @class JourneysApi
+ * @extends {BaseAPI}
+ */
+export declare class JourneysApi extends BaseAPI {
+    /**
+     * Add a marker to a journey.
+     * @summary Add Marker To Journey
+     * @param {string} journeyId
+     * @param {Marker} marker
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof JourneysApi
+     */
+    addMarkerToJourneyApiV1JourneysJourneyIdMarkersPost(journeyId: string, marker: Marker, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<Marker, any>>;
+    /**
+     * Register a new journey.
+     * @summary Create Journey
+     * @param {Journey} journey
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof JourneysApi
+     */
+    createJourneyApiV1JourneysPost(journey: Journey, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<Journey, any>>;
+    /**
+     * Get a journey by ID.
+     * @summary Get Journey
+     * @param {string} journeyId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof JourneysApi
+     */
+    getJourneyApiV1JourneysJourneyIdGet(journeyId: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<Journey, any>>;
+    /**
+     * Get all markers for a journey.
+     * @summary Get Journey Markers
+     * @param {string} journeyId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof JourneysApi
+     */
+    getJourneyMarkersApiV1JourneysJourneyIdMarkersGet(journeyId: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<Marker[], any>>;
+    /**
+     * Get all journeys with markers near the markers of a given journey.
+     * @summary Get Nearby Journeys
+     * @param {string} journeyId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof JourneysApi
+     */
+    getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<any, any>>;
+}
+/**
  * UsersApi - axios parameter creator
  * @export
  */
@@ -302,6 +623,22 @@ export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) 
      * @throws {RequiredError}
      */
     getCurrentUserApiV1UsersMeGet: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Get a user by ID.
+     * @summary Get User By Id
+     * @param {string} userId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getUserByIdApiV1UsersUserIdGet: (userId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Get journeys for a specific user.
+     * @summary Get User Journeys
+     * @param {string} userId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getUserJourneysApiV1UsersUserIdJourneysGet: (userId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Register a new user.
      * @summary Register User
@@ -349,6 +686,22 @@ export declare const UsersApiFp: (configuration?: Configuration) => {
      */
     getCurrentUserApiV1UsersMeGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>>;
     /**
+     * Get a user by ID.
+     * @summary Get User By Id
+     * @param {string} userId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getUserByIdApiV1UsersUserIdGet(userId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>>;
+    /**
+     * Get journeys for a specific user.
+     * @summary Get User Journeys
+     * @param {string} userId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getUserJourneysApiV1UsersUserIdJourneysGet(userId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>>;
+    /**
      * Register a new user.
      * @summary Register User
      * @param {User} user
@@ -394,6 +747,22 @@ export declare const UsersApiFactory: (configuration?: Configuration, basePath?:
      * @throws {RequiredError}
      */
     getCurrentUserApiV1UsersMeGet(options?: RawAxiosRequestConfig): AxiosPromise<User>;
+    /**
+     * Get a user by ID.
+     * @summary Get User By Id
+     * @param {string} userId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getUserByIdApiV1UsersUserIdGet(userId: string, options?: RawAxiosRequestConfig): AxiosPromise<User>;
+    /**
+     * Get journeys for a specific user.
+     * @summary Get User Journeys
+     * @param {string} userId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getUserJourneysApiV1UsersUserIdJourneysGet(userId: string, options?: RawAxiosRequestConfig): AxiosPromise<any>;
     /**
      * Register a new user.
      * @summary Register User
@@ -443,6 +812,24 @@ export declare class UsersApi extends BaseAPI {
      * @memberof UsersApi
      */
     getCurrentUserApiV1UsersMeGet(options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<User, any>>;
+    /**
+     * Get a user by ID.
+     * @summary Get User By Id
+     * @param {string} userId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    getUserByIdApiV1UsersUserIdGet(userId: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<User, any>>;
+    /**
+     * Get journeys for a specific user.
+     * @summary Get User Journeys
+     * @param {string} userId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    getUserJourneysApiV1UsersUserIdJourneysGet(userId: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<any, any>>;
     /**
      * Register a new user.
      * @summary Register User

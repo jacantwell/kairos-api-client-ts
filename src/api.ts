@@ -26,6 +26,32 @@ import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError, operationServerM
 /**
  * 
  * @export
+ * @interface Coordinates
+ */
+export interface Coordinates {
+    /**
+     * 
+     * @type {string}
+     * @memberof Coordinates
+     */
+    'type'?: CoordinatesTypeEnum;
+    /**
+     * 
+     * @type {Array<number>}
+     * @memberof Coordinates
+     */
+    'coordinates': Array<number>;
+}
+
+export const CoordinatesTypeEnum = {
+    Point: 'Point'
+} as const;
+
+export type CoordinatesTypeEnum = typeof CoordinatesTypeEnum[keyof typeof CoordinatesTypeEnum];
+
+/**
+ * 
+ * @export
  * @interface HTTPValidationError
  */
 export interface HTTPValidationError {
@@ -36,6 +62,112 @@ export interface HTTPValidationError {
      */
     'detail'?: Array<ValidationError>;
 }
+/**
+ * 
+ * @export
+ * @interface Journey
+ */
+export interface Journey {
+    /**
+     * 
+     * @type {string}
+     * @memberof Journey
+     */
+    '_id'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Journey
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Journey
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Journey
+     */
+    'user_id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Journey
+     */
+    'created_at'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Journey
+     */
+    'active': boolean;
+}
+/**
+ * 
+ * @export
+ * @interface Marker
+ */
+export interface Marker {
+    /**
+     * 
+     * @type {string}
+     * @memberof Marker
+     */
+    '_id'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Marker
+     */
+    'journey_id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Marker
+     */
+    'marker_type': MarkerMarkerTypeEnum;
+    /**
+     * 
+     * @type {Coordinates}
+     * @memberof Marker
+     */
+    'coordinates': Coordinates;
+    /**
+     * 
+     * @type {string}
+     * @memberof Marker
+     */
+    'timestamp'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Marker
+     */
+    'estimated_time'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Marker
+     */
+    'notes'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Marker
+     */
+    'created_at'?: string;
+}
+
+export const MarkerMarkerTypeEnum = {
+    Past: 'past',
+    Plan: 'plan'
+} as const;
+
+export type MarkerMarkerTypeEnum = typeof MarkerMarkerTypeEnum[keyof typeof MarkerMarkerTypeEnum];
+
 /**
  * 
  * @export
@@ -458,6 +590,417 @@ export class DefaultApi extends BaseAPI {
 
 
 /**
+ * JourneysApi - axios parameter creator
+ * @export
+ */
+export const JourneysApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Add a marker to a journey.
+         * @summary Add Marker To Journey
+         * @param {string} journeyId 
+         * @param {Marker} marker 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        addMarkerToJourneyApiV1JourneysJourneyIdMarkersPost: async (journeyId: string, marker: Marker, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'journeyId' is not null or undefined
+            assertParamExists('addMarkerToJourneyApiV1JourneysJourneyIdMarkersPost', 'journeyId', journeyId)
+            // verify required parameter 'marker' is not null or undefined
+            assertParamExists('addMarkerToJourneyApiV1JourneysJourneyIdMarkersPost', 'marker', marker)
+            const localVarPath = `/api/v1/journeys/{journey_id}/markers`
+                .replace(`{${"journey_id"}}`, encodeURIComponent(String(journeyId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(marker, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Register a new journey.
+         * @summary Create Journey
+         * @param {Journey} journey 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createJourneyApiV1JourneysPost: async (journey: Journey, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'journey' is not null or undefined
+            assertParamExists('createJourneyApiV1JourneysPost', 'journey', journey)
+            const localVarPath = `/api/v1/journeys/`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication OAuth2PasswordBearer required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2PasswordBearer", [], configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(journey, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get a journey by ID.
+         * @summary Get Journey
+         * @param {string} journeyId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getJourneyApiV1JourneysJourneyIdGet: async (journeyId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'journeyId' is not null or undefined
+            assertParamExists('getJourneyApiV1JourneysJourneyIdGet', 'journeyId', journeyId)
+            const localVarPath = `/api/v1/journeys/{journey_id}`
+                .replace(`{${"journey_id"}}`, encodeURIComponent(String(journeyId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication OAuth2PasswordBearer required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2PasswordBearer", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get all markers for a journey.
+         * @summary Get Journey Markers
+         * @param {string} journeyId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getJourneyMarkersApiV1JourneysJourneyIdMarkersGet: async (journeyId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'journeyId' is not null or undefined
+            assertParamExists('getJourneyMarkersApiV1JourneysJourneyIdMarkersGet', 'journeyId', journeyId)
+            const localVarPath = `/api/v1/journeys/{journey_id}/markers`
+                .replace(`{${"journey_id"}}`, encodeURIComponent(String(journeyId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication OAuth2PasswordBearer required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2PasswordBearer", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get all journeys with markers near the markers of a given journey.
+         * @summary Get Nearby Journeys
+         * @param {string} journeyId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet: async (journeyId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'journeyId' is not null or undefined
+            assertParamExists('getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet', 'journeyId', journeyId)
+            const localVarPath = `/api/v1/journeys/{journey_id}/journeys/nearby`
+                .replace(`{${"journey_id"}}`, encodeURIComponent(String(journeyId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication OAuth2PasswordBearer required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2PasswordBearer", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * JourneysApi - functional programming interface
+ * @export
+ */
+export const JourneysApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = JourneysApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Add a marker to a journey.
+         * @summary Add Marker To Journey
+         * @param {string} journeyId 
+         * @param {Marker} marker 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async addMarkerToJourneyApiV1JourneysJourneyIdMarkersPost(journeyId: string, marker: Marker, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Marker>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.addMarkerToJourneyApiV1JourneysJourneyIdMarkersPost(journeyId, marker, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['JourneysApi.addMarkerToJourneyApiV1JourneysJourneyIdMarkersPost']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Register a new journey.
+         * @summary Create Journey
+         * @param {Journey} journey 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createJourneyApiV1JourneysPost(journey: Journey, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Journey>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createJourneyApiV1JourneysPost(journey, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['JourneysApi.createJourneyApiV1JourneysPost']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Get a journey by ID.
+         * @summary Get Journey
+         * @param {string} journeyId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getJourneyApiV1JourneysJourneyIdGet(journeyId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Journey>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getJourneyApiV1JourneysJourneyIdGet(journeyId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['JourneysApi.getJourneyApiV1JourneysJourneyIdGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Get all markers for a journey.
+         * @summary Get Journey Markers
+         * @param {string} journeyId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getJourneyMarkersApiV1JourneysJourneyIdMarkersGet(journeyId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Marker>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getJourneyMarkersApiV1JourneysJourneyIdMarkersGet(journeyId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['JourneysApi.getJourneyMarkersApiV1JourneysJourneyIdMarkersGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Get all journeys with markers near the markers of a given journey.
+         * @summary Get Nearby Journeys
+         * @param {string} journeyId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['JourneysApi.getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * JourneysApi - factory interface
+ * @export
+ */
+export const JourneysApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = JourneysApiFp(configuration)
+    return {
+        /**
+         * Add a marker to a journey.
+         * @summary Add Marker To Journey
+         * @param {string} journeyId 
+         * @param {Marker} marker 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        addMarkerToJourneyApiV1JourneysJourneyIdMarkersPost(journeyId: string, marker: Marker, options?: RawAxiosRequestConfig): AxiosPromise<Marker> {
+            return localVarFp.addMarkerToJourneyApiV1JourneysJourneyIdMarkersPost(journeyId, marker, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Register a new journey.
+         * @summary Create Journey
+         * @param {Journey} journey 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createJourneyApiV1JourneysPost(journey: Journey, options?: RawAxiosRequestConfig): AxiosPromise<Journey> {
+            return localVarFp.createJourneyApiV1JourneysPost(journey, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Get a journey by ID.
+         * @summary Get Journey
+         * @param {string} journeyId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getJourneyApiV1JourneysJourneyIdGet(journeyId: string, options?: RawAxiosRequestConfig): AxiosPromise<Journey> {
+            return localVarFp.getJourneyApiV1JourneysJourneyIdGet(journeyId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Get all markers for a journey.
+         * @summary Get Journey Markers
+         * @param {string} journeyId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getJourneyMarkersApiV1JourneysJourneyIdMarkersGet(journeyId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<Marker>> {
+            return localVarFp.getJourneyMarkersApiV1JourneysJourneyIdMarkersGet(journeyId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Get all journeys with markers near the markers of a given journey.
+         * @summary Get Nearby Journeys
+         * @param {string} journeyId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId: string, options?: RawAxiosRequestConfig): AxiosPromise<any> {
+            return localVarFp.getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * JourneysApi - object-oriented interface
+ * @export
+ * @class JourneysApi
+ * @extends {BaseAPI}
+ */
+export class JourneysApi extends BaseAPI {
+    /**
+     * Add a marker to a journey.
+     * @summary Add Marker To Journey
+     * @param {string} journeyId 
+     * @param {Marker} marker 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof JourneysApi
+     */
+    public addMarkerToJourneyApiV1JourneysJourneyIdMarkersPost(journeyId: string, marker: Marker, options?: RawAxiosRequestConfig) {
+        return JourneysApiFp(this.configuration).addMarkerToJourneyApiV1JourneysJourneyIdMarkersPost(journeyId, marker, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Register a new journey.
+     * @summary Create Journey
+     * @param {Journey} journey 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof JourneysApi
+     */
+    public createJourneyApiV1JourneysPost(journey: Journey, options?: RawAxiosRequestConfig) {
+        return JourneysApiFp(this.configuration).createJourneyApiV1JourneysPost(journey, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Get a journey by ID.
+     * @summary Get Journey
+     * @param {string} journeyId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof JourneysApi
+     */
+    public getJourneyApiV1JourneysJourneyIdGet(journeyId: string, options?: RawAxiosRequestConfig) {
+        return JourneysApiFp(this.configuration).getJourneyApiV1JourneysJourneyIdGet(journeyId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Get all markers for a journey.
+     * @summary Get Journey Markers
+     * @param {string} journeyId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof JourneysApi
+     */
+    public getJourneyMarkersApiV1JourneysJourneyIdMarkersGet(journeyId: string, options?: RawAxiosRequestConfig) {
+        return JourneysApiFp(this.configuration).getJourneyMarkersApiV1JourneysJourneyIdMarkersGet(journeyId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Get all journeys with markers near the markers of a given journey.
+     * @summary Get Nearby Journeys
+     * @param {string} journeyId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof JourneysApi
+     */
+    public getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId: string, options?: RawAxiosRequestConfig) {
+        return JourneysApiFp(this.configuration).getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
  * UsersApi - axios parameter creator
  * @export
  */
@@ -471,6 +1014,82 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
          */
         getCurrentUserApiV1UsersMeGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/v1/users/me`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication OAuth2PasswordBearer required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2PasswordBearer", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get a user by ID.
+         * @summary Get User By Id
+         * @param {string} userId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUserByIdApiV1UsersUserIdGet: async (userId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('getUserByIdApiV1UsersUserIdGet', 'userId', userId)
+            const localVarPath = `/api/v1/users/{user_id}`
+                .replace(`{${"user_id"}}`, encodeURIComponent(String(userId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication OAuth2PasswordBearer required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2PasswordBearer", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get journeys for a specific user.
+         * @summary Get User Journeys
+         * @param {string} userId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUserJourneysApiV1UsersUserIdJourneysGet: async (userId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('getUserJourneysApiV1UsersUserIdJourneysGet', 'userId', userId)
+            const localVarPath = `/api/v1/users/{user_id}/journeys`
+                .replace(`{${"user_id"}}`, encodeURIComponent(String(userId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -674,6 +1293,32 @@ export const UsersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Get a user by ID.
+         * @summary Get User By Id
+         * @param {string} userId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getUserByIdApiV1UsersUserIdGet(userId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserByIdApiV1UsersUserIdGet(userId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['UsersApi.getUserByIdApiV1UsersUserIdGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Get journeys for a specific user.
+         * @summary Get User Journeys
+         * @param {string} userId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getUserJourneysApiV1UsersUserIdJourneysGet(userId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserJourneysApiV1UsersUserIdJourneysGet(userId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['UsersApi.getUserJourneysApiV1UsersUserIdJourneysGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Register a new user.
          * @summary Register User
          * @param {User} user 
@@ -746,6 +1391,26 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.getCurrentUserApiV1UsersMeGet(options).then((request) => request(axios, basePath));
         },
         /**
+         * Get a user by ID.
+         * @summary Get User By Id
+         * @param {string} userId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUserByIdApiV1UsersUserIdGet(userId: string, options?: RawAxiosRequestConfig): AxiosPromise<User> {
+            return localVarFp.getUserByIdApiV1UsersUserIdGet(userId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Get journeys for a specific user.
+         * @summary Get User Journeys
+         * @param {string} userId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUserJourneysApiV1UsersUserIdJourneysGet(userId: string, options?: RawAxiosRequestConfig): AxiosPromise<any> {
+            return localVarFp.getUserJourneysApiV1UsersUserIdJourneysGet(userId, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Register a new user.
          * @summary Register User
          * @param {User} user 
@@ -805,6 +1470,30 @@ export class UsersApi extends BaseAPI {
      */
     public getCurrentUserApiV1UsersMeGet(options?: RawAxiosRequestConfig) {
         return UsersApiFp(this.configuration).getCurrentUserApiV1UsersMeGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Get a user by ID.
+     * @summary Get User By Id
+     * @param {string} userId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    public getUserByIdApiV1UsersUserIdGet(userId: string, options?: RawAxiosRequestConfig) {
+        return UsersApiFp(this.configuration).getUserByIdApiV1UsersUserIdGet(userId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Get journeys for a specific user.
+     * @summary Get User Journeys
+     * @param {string} userId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    public getUserJourneysApiV1UsersUserIdJourneysGet(userId: string, options?: RawAxiosRequestConfig) {
+        return UsersApiFp(this.configuration).getUserJourneysApiV1UsersUserIdJourneysGet(userId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
