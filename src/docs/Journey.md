@@ -10,7 +10,8 @@ Name | Type | Description | Notes
 **description** | **string** |  | [optional] [default to '']
 **user_id** | **string** |  | [default to undefined]
 **created_at** | **string** |  | [optional] [default to undefined]
-**active** | **boolean** |  | [default to undefined]
+**active** | **boolean** |  | [optional] [default to false]
+**completed** | **boolean** |  | [optional] [default to false]
 
 ## Example
 
@@ -24,6 +25,7 @@ const instance: Journey = {
     user_id,
     created_at,
     active,
+    completed,
 };
 ```
 

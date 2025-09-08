@@ -91,7 +91,13 @@ export interface Journey {
      * @type {boolean}
      * @memberof Journey
      */
-    'active': boolean;
+    'active'?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof Journey
+     */
+    'completed'?: boolean;
 }
 /**
  *
@@ -510,6 +516,14 @@ export declare const JourneysApiAxiosParamCreator: (configuration?: Configuratio
      */
     getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet: (journeyId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     * Set a journey as completed. If a journey is complete it cannot be active.
+     * @summary Set Completed Journey
+     * @param {string} journeyId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    setCompletedJourneyApiV1JourneysJourneyIdPatch: (journeyId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      *
      * @summary Toggle Active Journey
      * @param {string} journeyId
@@ -573,6 +587,14 @@ export declare const JourneysApiFp: (configuration?: Configuration) => {
      */
     getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>>;
     /**
+     * Set a journey as completed. If a journey is complete it cannot be active.
+     * @summary Set Completed Journey
+     * @param {string} journeyId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    setCompletedJourneyApiV1JourneysJourneyIdPatch(journeyId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>>;
+    /**
      *
      * @summary Toggle Active Journey
      * @param {string} journeyId
@@ -635,6 +657,14 @@ export declare const JourneysApiFactory: (configuration?: Configuration, basePat
      * @throws {RequiredError}
      */
     getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId: string, options?: RawAxiosRequestConfig): AxiosPromise<any>;
+    /**
+     * Set a journey as completed. If a journey is complete it cannot be active.
+     * @summary Set Completed Journey
+     * @param {string} journeyId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    setCompletedJourneyApiV1JourneysJourneyIdPatch(journeyId: string, options?: RawAxiosRequestConfig): AxiosPromise<any>;
     /**
      *
      * @summary Toggle Active Journey
@@ -706,6 +736,15 @@ export declare class JourneysApi extends BaseAPI {
      * @memberof JourneysApi
      */
     getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<any, any>>;
+    /**
+     * Set a journey as completed. If a journey is complete it cannot be active.
+     * @summary Set Completed Journey
+     * @param {string} journeyId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof JourneysApi
+     */
+    setCompletedJourneyApiV1JourneysJourneyIdPatch(journeyId: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<any, any>>;
     /**
      *
      * @summary Toggle Active Journey

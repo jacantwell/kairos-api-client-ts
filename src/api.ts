@@ -103,7 +103,13 @@ export interface Journey {
      * @type {boolean}
      * @memberof Journey
      */
-    'active': boolean;
+    'active'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Journey
+     */
+    'completed'?: boolean;
 }
 /**
  * 
@@ -906,6 +912,44 @@ export const JourneysApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
+         * Set a journey as completed. If a journey is complete it cannot be active.
+         * @summary Set Completed Journey
+         * @param {string} journeyId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        setCompletedJourneyApiV1JourneysJourneyIdPatch: async (journeyId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'journeyId' is not null or undefined
+            assertParamExists('setCompletedJourneyApiV1JourneysJourneyIdPatch', 'journeyId', journeyId)
+            const localVarPath = `/api/v1/journeys/{journey_id}`
+                .replace(`{${"journey_id"}}`, encodeURIComponent(String(journeyId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication OAuth2PasswordBearer required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2PasswordBearer", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * 
          * @summary Toggle Active Journey
          * @param {string} journeyId 
@@ -1033,6 +1077,19 @@ export const JourneysApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Set a journey as completed. If a journey is complete it cannot be active.
+         * @summary Set Completed Journey
+         * @param {string} journeyId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async setCompletedJourneyApiV1JourneysJourneyIdPatch(journeyId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setCompletedJourneyApiV1JourneysJourneyIdPatch(journeyId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['JourneysApi.setCompletedJourneyApiV1JourneysJourneyIdPatch']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * 
          * @summary Toggle Active Journey
          * @param {string} journeyId 
@@ -1115,6 +1172,16 @@ export const JourneysApiFactory = function (configuration?: Configuration, baseP
          */
         getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId: string, options?: RawAxiosRequestConfig): AxiosPromise<any> {
             return localVarFp.getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Set a journey as completed. If a journey is complete it cannot be active.
+         * @summary Set Completed Journey
+         * @param {string} journeyId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        setCompletedJourneyApiV1JourneysJourneyIdPatch(journeyId: string, options?: RawAxiosRequestConfig): AxiosPromise<any> {
+            return localVarFp.setCompletedJourneyApiV1JourneysJourneyIdPatch(journeyId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -1207,6 +1274,18 @@ export class JourneysApi extends BaseAPI {
      */
     public getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId: string, options?: RawAxiosRequestConfig) {
         return JourneysApiFp(this.configuration).getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Set a journey as completed. If a journey is complete it cannot be active.
+     * @summary Set Completed Journey
+     * @param {string} journeyId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof JourneysApi
+     */
+    public setCompletedJourneyApiV1JourneysJourneyIdPatch(journeyId: string, options?: RawAxiosRequestConfig) {
+        return JourneysApiFp(this.configuration).setCompletedJourneyApiV1JourneysJourneyIdPatch(journeyId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
