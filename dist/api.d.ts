@@ -509,6 +509,14 @@ export declare const JourneysApiAxiosParamCreator: (configuration?: Configuratio
      * @throws {RequiredError}
      */
     getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet: (journeyId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @summary Toggle Active Journey
+     * @param {string} journeyId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    toggleActiveJourneyApiV1JourneysJourneyIdActivePatch: (journeyId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
  * JourneysApi - functional programming interface
@@ -564,6 +572,14 @@ export declare const JourneysApiFp: (configuration?: Configuration) => {
      * @throws {RequiredError}
      */
     getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>>;
+    /**
+     *
+     * @summary Toggle Active Journey
+     * @param {string} journeyId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    toggleActiveJourneyApiV1JourneysJourneyIdActivePatch(journeyId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>>;
 };
 /**
  * JourneysApi - factory interface
@@ -619,6 +635,14 @@ export declare const JourneysApiFactory: (configuration?: Configuration, basePat
      * @throws {RequiredError}
      */
     getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId: string, options?: RawAxiosRequestConfig): AxiosPromise<any>;
+    /**
+     *
+     * @summary Toggle Active Journey
+     * @param {string} journeyId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    toggleActiveJourneyApiV1JourneysJourneyIdActivePatch(journeyId: string, options?: RawAxiosRequestConfig): AxiosPromise<any>;
 };
 /**
  * JourneysApi - object-oriented interface
@@ -682,6 +706,15 @@ export declare class JourneysApi extends BaseAPI {
      * @memberof JourneysApi
      */
     getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<any, any>>;
+    /**
+     *
+     * @summary Toggle Active Journey
+     * @param {string} journeyId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof JourneysApi
+     */
+    toggleActiveJourneyApiV1JourneysJourneyIdActivePatch(journeyId: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<any, any>>;
 }
 /**
  * UsersApi - axios parameter creator

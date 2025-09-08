@@ -905,6 +905,44 @@ export const JourneysApiAxiosParamCreator = function (configuration?: Configurat
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @summary Toggle Active Journey
+         * @param {string} journeyId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        toggleActiveJourneyApiV1JourneysJourneyIdActivePatch: async (journeyId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'journeyId' is not null or undefined
+            assertParamExists('toggleActiveJourneyApiV1JourneysJourneyIdActivePatch', 'journeyId', journeyId)
+            const localVarPath = `/api/v1/journeys/{journey_id}/active`
+                .replace(`{${"journey_id"}}`, encodeURIComponent(String(journeyId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication OAuth2PasswordBearer required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2PasswordBearer", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -994,6 +1032,19 @@ export const JourneysApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['JourneysApi.getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * 
+         * @summary Toggle Active Journey
+         * @param {string} journeyId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async toggleActiveJourneyApiV1JourneysJourneyIdActivePatch(journeyId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.toggleActiveJourneyApiV1JourneysJourneyIdActivePatch(journeyId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['JourneysApi.toggleActiveJourneyApiV1JourneysJourneyIdActivePatch']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -1064,6 +1115,16 @@ export const JourneysApiFactory = function (configuration?: Configuration, baseP
          */
         getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId: string, options?: RawAxiosRequestConfig): AxiosPromise<any> {
             return localVarFp.getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Toggle Active Journey
+         * @param {string} journeyId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        toggleActiveJourneyApiV1JourneysJourneyIdActivePatch(journeyId: string, options?: RawAxiosRequestConfig): AxiosPromise<any> {
+            return localVarFp.toggleActiveJourneyApiV1JourneysJourneyIdActivePatch(journeyId, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1146,6 +1207,18 @@ export class JourneysApi extends BaseAPI {
      */
     public getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId: string, options?: RawAxiosRequestConfig) {
         return JourneysApiFp(this.configuration).getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Toggle Active Journey
+     * @param {string} journeyId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof JourneysApi
+     */
+    public toggleActiveJourneyApiV1JourneysJourneyIdActivePatch(journeyId: string, options?: RawAxiosRequestConfig) {
+        return JourneysApiFp(this.configuration).toggleActiveJourneyApiV1JourneysJourneyIdActivePatch(journeyId, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
