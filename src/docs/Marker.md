@@ -6,6 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **_id** | **string** |  | [optional] [default to undefined]
+**name** | **string** |  | [default to undefined]
 **journey_id** | **string** |  | [default to undefined]
 **marker_type** | **string** |  | [default to undefined]
 **coordinates** | [**Coordinates**](Coordinates.md) |  | [default to undefined]
@@ -21,6 +22,7 @@ import { Marker } from './api';
 
 const instance: Marker = {
     _id,
+    name,
     journey_id,
     marker_type,
     coordinates,

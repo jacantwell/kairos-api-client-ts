@@ -128,6 +128,12 @@ export interface Marker {
      * @type {string}
      * @memberof Marker
      */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Marker
+     */
     'journey_id': string;
     /**
      * 
