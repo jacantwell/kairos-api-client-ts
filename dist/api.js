@@ -498,6 +498,42 @@ const JourneysApiAxiosParamCreator = function (configuration) {
             };
         },
         /**
+         * Delete a marker from a journey.
+         * @summary Delete Journey Marker
+         * @param {string} journeyId
+         * @param {string} markerId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdDelete: async (journeyId, markerId, options = {}) => {
+            // verify required parameter 'journeyId' is not null or undefined
+            (0, common_1.assertParamExists)('deleteJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdDelete', 'journeyId', journeyId);
+            // verify required parameter 'markerId' is not null or undefined
+            (0, common_1.assertParamExists)('deleteJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdDelete', 'markerId', markerId);
+            const localVarPath = `/api/v1/journeys/{journey_id}/markers/{marker_id}`
+                .replace(`{${"journey_id"}}`, encodeURIComponent(String(journeyId)))
+                .replace(`{${"marker_id"}}`, encodeURIComponent(String(markerId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication OAuth2PasswordBearer required
+            // oauth required
+            await (0, common_1.setOAuthToObject)(localVarHeaderParameter, "OAuth2PasswordBearer", [], configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Get a journey by ID.
          * @summary Get Journey
          * @param {string} journeyId
@@ -711,6 +747,21 @@ const JourneysApiFp = function (configuration) {
             return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Delete a marker from a journey.
+         * @summary Delete Journey Marker
+         * @param {string} journeyId
+         * @param {string} markerId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdDelete(journeyId, markerId, options) {
+            var _a, _b, _c;
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdDelete(journeyId, markerId, options);
+            const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+            const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['JourneysApi.deleteJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdDelete']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Get a journey by ID.
          * @summary Get Journey
          * @param {string} journeyId
@@ -822,6 +873,17 @@ const JourneysApiFactory = function (configuration, basePath, axios) {
             return localVarFp.deleteJourneyApiV1JourneysJourneyIdDelete(journeyId, options).then((request) => request(axios, basePath));
         },
         /**
+         * Delete a marker from a journey.
+         * @summary Delete Journey Marker
+         * @param {string} journeyId
+         * @param {string} markerId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdDelete(journeyId, markerId, options) {
+            return localVarFp.deleteJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdDelete(journeyId, markerId, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Get a journey by ID.
          * @summary Get Journey
          * @param {string} journeyId
@@ -914,6 +976,18 @@ class JourneysApi extends base_1.BaseAPI {
      */
     deleteJourneyApiV1JourneysJourneyIdDelete(journeyId, options) {
         return (0, exports.JourneysApiFp)(this.configuration).deleteJourneyApiV1JourneysJourneyIdDelete(journeyId, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Delete a marker from a journey.
+     * @summary Delete Journey Marker
+     * @param {string} journeyId
+     * @param {string} markerId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof JourneysApi
+     */
+    deleteJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdDelete(journeyId, markerId, options) {
+        return (0, exports.JourneysApiFp)(this.configuration).deleteJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdDelete(journeyId, markerId, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Get a journey by ID.

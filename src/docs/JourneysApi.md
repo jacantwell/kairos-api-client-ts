@@ -7,6 +7,7 @@ All URIs are relative to *http://localhost*
 |[**addMarkerToJourneyApiV1JourneysJourneyIdMarkersPost**](#addmarkertojourneyapiv1journeysjourneyidmarkerspost) | **POST** /api/v1/journeys/{journey_id}/markers | Add Marker To Journey|
 |[**createJourneyApiV1JourneysPost**](#createjourneyapiv1journeyspost) | **POST** /api/v1/journeys/ | Create Journey|
 |[**deleteJourneyApiV1JourneysJourneyIdDelete**](#deletejourneyapiv1journeysjourneyiddelete) | **DELETE** /api/v1/journeys/{journey_id} | Delete Journey|
+|[**deleteJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdDelete**](#deletejourneymarkerapiv1journeysjourneyidmarkersmarkeriddelete) | **DELETE** /api/v1/journeys/{journey_id}/markers/{marker_id} | Delete Journey Marker|
 |[**getJourneyApiV1JourneysJourneyIdGet**](#getjourneyapiv1journeysjourneyidget) | **GET** /api/v1/journeys/{journey_id} | Get Journey|
 |[**getJourneyMarkersApiV1JourneysJourneyIdMarkersGet**](#getjourneymarkersapiv1journeysjourneyidmarkersget) | **GET** /api/v1/journeys/{journey_id}/markers | Get Journey Markers|
 |[**getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet**](#getnearbyjourneysapiv1journeysjourneyidjourneysnearbyget) | **GET** /api/v1/journeys/{journey_id}/journeys/nearby | Get Nearby Journeys|
@@ -149,6 +150,61 @@ const { status, data } = await apiInstance.deleteJourneyApiV1JourneysJourneyIdDe
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **journeyId** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+**any**
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Successful Response |  -  |
+|**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **deleteJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdDelete**
+> any deleteJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdDelete()
+
+Delete a marker from a journey.
+
+### Example
+
+```typescript
+import {
+    JourneysApi,
+    Configuration
+} from './api';
+
+const configuration = new Configuration();
+const apiInstance = new JourneysApi(configuration);
+
+let journeyId: string; // (default to undefined)
+let markerId: string; // (default to undefined)
+
+const { status, data } = await apiInstance.deleteJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdDelete(
+    journeyId,
+    markerId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **journeyId** | [**string**] |  | defaults to undefined|
+| **markerId** | [**string**] |  | defaults to undefined|
 
 
 ### Return type

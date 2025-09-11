@@ -498,6 +498,15 @@ export declare const JourneysApiAxiosParamCreator: (configuration?: Configuratio
      */
     deleteJourneyApiV1JourneysJourneyIdDelete: (journeyId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     * Delete a marker from a journey.
+     * @summary Delete Journey Marker
+     * @param {string} journeyId
+     * @param {string} markerId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    deleteJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdDelete: (journeyId: string, markerId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * Get a journey by ID.
      * @summary Get Journey
      * @param {string} journeyId
@@ -569,6 +578,15 @@ export declare const JourneysApiFp: (configuration?: Configuration) => {
      */
     deleteJourneyApiV1JourneysJourneyIdDelete(journeyId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>>;
     /**
+     * Delete a marker from a journey.
+     * @summary Delete Journey Marker
+     * @param {string} journeyId
+     * @param {string} markerId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    deleteJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdDelete(journeyId: string, markerId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>>;
+    /**
      * Get a journey by ID.
      * @summary Get Journey
      * @param {string} journeyId
@@ -639,6 +657,15 @@ export declare const JourneysApiFactory: (configuration?: Configuration, basePat
      * @throws {RequiredError}
      */
     deleteJourneyApiV1JourneysJourneyIdDelete(journeyId: string, options?: RawAxiosRequestConfig): AxiosPromise<any>;
+    /**
+     * Delete a marker from a journey.
+     * @summary Delete Journey Marker
+     * @param {string} journeyId
+     * @param {string} markerId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    deleteJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdDelete(journeyId: string, markerId: string, options?: RawAxiosRequestConfig): AxiosPromise<any>;
     /**
      * Get a journey by ID.
      * @summary Get Journey
@@ -715,6 +742,16 @@ export declare class JourneysApi extends BaseAPI {
      * @memberof JourneysApi
      */
     deleteJourneyApiV1JourneysJourneyIdDelete(journeyId: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<any, any>>;
+    /**
+     * Delete a marker from a journey.
+     * @summary Delete Journey Marker
+     * @param {string} journeyId
+     * @param {string} markerId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof JourneysApi
+     */
+    deleteJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdDelete(journeyId: string, markerId: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<any, any>>;
     /**
      * Get a journey by ID.
      * @summary Get Journey
