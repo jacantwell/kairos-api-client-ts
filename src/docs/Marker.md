@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **_id** | **string** |  | [optional] [default to undefined]
 **name** | **string** |  | [default to undefined]
 **journey_id** | **string** |  | [default to undefined]
+**owner_id** | **string** |  | [optional] [default to undefined]
 **marker_type** | **string** |  | [default to undefined]
 **coordinates** | [**Coordinates**](Coordinates.md) |  | [default to undefined]
 **timestamp** | **string** |  | [optional] [default to undefined]
@@ -24,6 +25,7 @@ const instance: Marker = {
     _id,
     name,
     journey_id,
+    owner_id,
     marker_type,
     coordinates,
     timestamp,

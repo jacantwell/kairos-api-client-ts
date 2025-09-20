@@ -128,6 +128,12 @@ export interface Marker {
      * @type {string}
      * @memberof Marker
      */
+    'owner_id'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof Marker
+     */
     'marker_type': MarkerMarkerTypeEnum;
     /**
      *
@@ -226,6 +232,12 @@ export interface User {
      * @memberof User
      */
     'phonenumber'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof User
+     */
+    'instagram'?: string | null;
     /**
      *
      * @type {string}
@@ -804,6 +816,14 @@ export declare class JourneysApi extends BaseAPI {
  */
 export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) => {
     /**
+     * Delete a user by ID.
+     * @summary Delete User
+     * @param {string} userId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    deleteUserApiV1UsersUserIdDelete: (userId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * Get the current authenticated user.
      * @summary Get Current User
      * @param {*} [options] Override http request option.
@@ -852,6 +872,15 @@ export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) 
      */
     updatePasswordApiV1UsersUpdatePasswordPost: (token: string, newPassword: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     * Update a user by ID.
+     * @summary Update User
+     * @param {string} userId
+     * @param {User} user
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    updateUserApiV1UsersUserIdPut: (userId: string, user: User, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      *
      * @summary Verify Email
      * @param {string} token
@@ -865,6 +894,14 @@ export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) 
  * @export
  */
 export declare const UsersApiFp: (configuration?: Configuration) => {
+    /**
+     * Delete a user by ID.
+     * @summary Delete User
+     * @param {string} userId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    deleteUserApiV1UsersUserIdDelete(userId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>>;
     /**
      * Get the current authenticated user.
      * @summary Get Current User
@@ -914,6 +951,15 @@ export declare const UsersApiFp: (configuration?: Configuration) => {
      */
     updatePasswordApiV1UsersUpdatePasswordPost(token: string, newPassword: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>>;
     /**
+     * Update a user by ID.
+     * @summary Update User
+     * @param {string} userId
+     * @param {User} user
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    updateUserApiV1UsersUserIdPut(userId: string, user: User, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>>;
+    /**
      *
      * @summary Verify Email
      * @param {string} token
@@ -927,6 +973,14 @@ export declare const UsersApiFp: (configuration?: Configuration) => {
  * @export
  */
 export declare const UsersApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     * Delete a user by ID.
+     * @summary Delete User
+     * @param {string} userId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    deleteUserApiV1UsersUserIdDelete(userId: string, options?: RawAxiosRequestConfig): AxiosPromise<any>;
     /**
      * Get the current authenticated user.
      * @summary Get Current User
@@ -976,6 +1030,15 @@ export declare const UsersApiFactory: (configuration?: Configuration, basePath?:
      */
     updatePasswordApiV1UsersUpdatePasswordPost(token: string, newPassword: string, options?: RawAxiosRequestConfig): AxiosPromise<any>;
     /**
+     * Update a user by ID.
+     * @summary Update User
+     * @param {string} userId
+     * @param {User} user
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    updateUserApiV1UsersUserIdPut(userId: string, user: User, options?: RawAxiosRequestConfig): AxiosPromise<any>;
+    /**
      *
      * @summary Verify Email
      * @param {string} token
@@ -991,6 +1054,15 @@ export declare const UsersApiFactory: (configuration?: Configuration, basePath?:
  * @extends {BaseAPI}
  */
 export declare class UsersApi extends BaseAPI {
+    /**
+     * Delete a user by ID.
+     * @summary Delete User
+     * @param {string} userId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    deleteUserApiV1UsersUserIdDelete(userId: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<any, any>>;
     /**
      * Get the current authenticated user.
      * @summary Get Current User
@@ -1045,6 +1117,16 @@ export declare class UsersApi extends BaseAPI {
      * @memberof UsersApi
      */
     updatePasswordApiV1UsersUpdatePasswordPost(token: string, newPassword: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<any, any>>;
+    /**
+     * Update a user by ID.
+     * @summary Update User
+     * @param {string} userId
+     * @param {User} user
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    updateUserApiV1UsersUserIdPut(userId: string, user: User, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<any, any>>;
     /**
      *
      * @summary Verify Email

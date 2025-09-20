@@ -54,7 +54,7 @@ const { status, data } = await apiInstance.addMarkerToJourneyApiV1JourneysJourne
 
 ### Authorization
 
-No authorization required
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
 
 ### HTTP request headers
 

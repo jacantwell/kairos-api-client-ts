@@ -422,6 +422,9 @@ const JourneysApiAxiosParamCreator = function (configuration) {
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
             const localVarHeaderParameter = {};
             const localVarQueryParameter = {};
+            // authentication OAuth2PasswordBearer required
+            // oauth required
+            await (0, common_1.setOAuthToObject)(localVarHeaderParameter, "OAuth2PasswordBearer", [], configuration);
             localVarHeaderParameter['Content-Type'] = 'application/json';
             (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -1053,6 +1056,38 @@ exports.JourneysApi = JourneysApi;
 const UsersApiAxiosParamCreator = function (configuration) {
     return {
         /**
+         * Delete a user by ID.
+         * @summary Delete User
+         * @param {string} userId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteUserApiV1UsersUserIdDelete: async (userId, options = {}) => {
+            // verify required parameter 'userId' is not null or undefined
+            (0, common_1.assertParamExists)('deleteUserApiV1UsersUserIdDelete', 'userId', userId);
+            const localVarPath = `/api/v1/users/{user_id}`
+                .replace(`{${"user_id"}}`, encodeURIComponent(String(userId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication OAuth2PasswordBearer required
+            // oauth required
+            await (0, common_1.setOAuthToObject)(localVarHeaderParameter, "OAuth2PasswordBearer", [], configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Get the current authenticated user.
          * @summary Get Current User
          * @param {*} [options] Override http request option.
@@ -1243,6 +1278,43 @@ const UsersApiAxiosParamCreator = function (configuration) {
             };
         },
         /**
+         * Update a user by ID.
+         * @summary Update User
+         * @param {string} userId
+         * @param {User} user
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateUserApiV1UsersUserIdPut: async (userId, user, options = {}) => {
+            // verify required parameter 'userId' is not null or undefined
+            (0, common_1.assertParamExists)('updateUserApiV1UsersUserIdPut', 'userId', userId);
+            // verify required parameter 'user' is not null or undefined
+            (0, common_1.assertParamExists)('updateUserApiV1UsersUserIdPut', 'user', user);
+            const localVarPath = `/api/v1/users/{user_id}`
+                .replace(`{${"user_id"}}`, encodeURIComponent(String(userId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication OAuth2PasswordBearer required
+            // oauth required
+            await (0, common_1.setOAuthToObject)(localVarHeaderParameter, "OAuth2PasswordBearer", [], configuration);
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(user, localVarRequestOptions, configuration);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          *
          * @summary Verify Email
          * @param {string} token
@@ -1283,6 +1355,20 @@ exports.UsersApiAxiosParamCreator = UsersApiAxiosParamCreator;
 const UsersApiFp = function (configuration) {
     const localVarAxiosParamCreator = (0, exports.UsersApiAxiosParamCreator)(configuration);
     return {
+        /**
+         * Delete a user by ID.
+         * @summary Delete User
+         * @param {string} userId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteUserApiV1UsersUserIdDelete(userId, options) {
+            var _a, _b, _c;
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteUserApiV1UsersUserIdDelete(userId, options);
+            const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+            const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['UsersApi.deleteUserApiV1UsersUserIdDelete']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
         /**
          * Get the current authenticated user.
          * @summary Get Current User
@@ -1368,6 +1454,21 @@ const UsersApiFp = function (configuration) {
             return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Update a user by ID.
+         * @summary Update User
+         * @param {string} userId
+         * @param {User} user
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateUserApiV1UsersUserIdPut(userId, user, options) {
+            var _a, _b, _c;
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateUserApiV1UsersUserIdPut(userId, user, options);
+            const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+            const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['UsersApi.updateUserApiV1UsersUserIdPut']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          *
          * @summary Verify Email
          * @param {string} token
@@ -1391,6 +1492,16 @@ exports.UsersApiFp = UsersApiFp;
 const UsersApiFactory = function (configuration, basePath, axios) {
     const localVarFp = (0, exports.UsersApiFp)(configuration);
     return {
+        /**
+         * Delete a user by ID.
+         * @summary Delete User
+         * @param {string} userId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteUserApiV1UsersUserIdDelete(userId, options) {
+            return localVarFp.deleteUserApiV1UsersUserIdDelete(userId, options).then((request) => request(axios, basePath));
+        },
         /**
          * Get the current authenticated user.
          * @summary Get Current User
@@ -1452,6 +1563,17 @@ const UsersApiFactory = function (configuration, basePath, axios) {
             return localVarFp.updatePasswordApiV1UsersUpdatePasswordPost(token, newPassword, options).then((request) => request(axios, basePath));
         },
         /**
+         * Update a user by ID.
+         * @summary Update User
+         * @param {string} userId
+         * @param {User} user
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateUserApiV1UsersUserIdPut(userId, user, options) {
+            return localVarFp.updateUserApiV1UsersUserIdPut(userId, user, options).then((request) => request(axios, basePath));
+        },
+        /**
          *
          * @summary Verify Email
          * @param {string} token
@@ -1471,6 +1593,17 @@ exports.UsersApiFactory = UsersApiFactory;
  * @extends {BaseAPI}
  */
 class UsersApi extends base_1.BaseAPI {
+    /**
+     * Delete a user by ID.
+     * @summary Delete User
+     * @param {string} userId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    deleteUserApiV1UsersUserIdDelete(userId, options) {
+        return (0, exports.UsersApiFp)(this.configuration).deleteUserApiV1UsersUserIdDelete(userId, options).then((request) => request(this.axios, this.basePath));
+    }
     /**
      * Get the current authenticated user.
      * @summary Get Current User
@@ -1536,6 +1669,18 @@ class UsersApi extends base_1.BaseAPI {
      */
     updatePasswordApiV1UsersUpdatePasswordPost(token, newPassword, options) {
         return (0, exports.UsersApiFp)(this.configuration).updatePasswordApiV1UsersUpdatePasswordPost(token, newPassword, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Update a user by ID.
+     * @summary Update User
+     * @param {string} userId
+     * @param {User} user
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    updateUserApiV1UsersUserIdPut(userId, user, options) {
+        return (0, exports.UsersApiFp)(this.configuration).updateUserApiV1UsersUserIdPut(userId, user, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      *

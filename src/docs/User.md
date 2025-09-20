@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **name** | **string** |  | [default to undefined]
 **password** | **string** |  | [default to undefined]
 **phonenumber** | **string** |  | [optional] [default to undefined]
+**instagram** | **string** |  | [optional] [default to undefined]
 **country** | **string** |  | [optional] [default to undefined]
 **is_verified** | **boolean** |  | [optional] [default to false]
 
@@ -24,6 +25,7 @@ const instance: User = {
     name,
     password,
     phonenumber,
+    instagram,
     country,
     is_verified,
 };

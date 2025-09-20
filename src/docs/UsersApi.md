@@ -4,13 +4,67 @@ All URIs are relative to *http://localhost*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
+|[**deleteUserApiV1UsersUserIdDelete**](#deleteuserapiv1usersuseriddelete) | **DELETE** /api/v1/users/{user_id} | Delete User|
 |[**getCurrentUserApiV1UsersMeGet**](#getcurrentuserapiv1usersmeget) | **GET** /api/v1/users/me | Get Current User|
 |[**getUserByIdApiV1UsersUserIdGet**](#getuserbyidapiv1usersuseridget) | **GET** /api/v1/users/{user_id} | Get User By Id|
 |[**getUserJourneysApiV1UsersUserIdJourneysGet**](#getuserjourneysapiv1usersuseridjourneysget) | **GET** /api/v1/users/{user_id}/journeys | Get User Journeys|
 |[**registerUserApiV1UsersRegisterPost**](#registeruserapiv1usersregisterpost) | **POST** /api/v1/users/register | Register User|
 |[**resetPasswordApiV1UsersResetPasswordPost**](#resetpasswordapiv1usersresetpasswordpost) | **POST** /api/v1/users/reset-password | Reset Password|
 |[**updatePasswordApiV1UsersUpdatePasswordPost**](#updatepasswordapiv1usersupdatepasswordpost) | **POST** /api/v1/users/update-password | Update Password|
+|[**updateUserApiV1UsersUserIdPut**](#updateuserapiv1usersuseridput) | **PUT** /api/v1/users/{user_id} | Update User|
 |[**verifyEmailApiV1UsersVerifyEmailGet**](#verifyemailapiv1usersverifyemailget) | **GET** /api/v1/users/verify-email | Verify Email|
+
+# **deleteUserApiV1UsersUserIdDelete**
+> any deleteUserApiV1UsersUserIdDelete()
+
+Delete a user by ID.
+
+### Example
+
+```typescript
+import {
+    UsersApi,
+    Configuration
+} from './api';
+
+const configuration = new Configuration();
+const apiInstance = new UsersApi(configuration);
+
+let userId: string; // (default to undefined)
+
+const { status, data } = await apiInstance.deleteUserApiV1UsersUserIdDelete(
+    userId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **userId** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+**any**
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Successful Response |  -  |
+|**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getCurrentUserApiV1UsersMeGet**
 > User getCurrentUserApiV1UsersMeGet()
@@ -307,6 +361,62 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Successful Response |  -  |
+|**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **updateUserApiV1UsersUserIdPut**
+> any updateUserApiV1UsersUserIdPut(user)
+
+Update a user by ID.
+
+### Example
+
+```typescript
+import {
+    UsersApi,
+    Configuration,
+    User
+} from './api';
+
+const configuration = new Configuration();
+const apiInstance = new UsersApi(configuration);
+
+let userId: string; // (default to undefined)
+let user: User; //
+
+const { status, data } = await apiInstance.updateUserApiV1UsersUserIdPut(
+    userId,
+    user
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **user** | **User**|  | |
+| **userId** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+**any**
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 
