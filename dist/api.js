@@ -1088,6 +1088,38 @@ const UsersApiAxiosParamCreator = function (configuration) {
             };
         },
         /**
+         * Get the active journey for a specific user.
+         * @summary Get Active Journey
+         * @param {string} userId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getActiveJourneyApiV1UsersUserIdJourneysActiveGet: async (userId, options = {}) => {
+            // verify required parameter 'userId' is not null or undefined
+            (0, common_1.assertParamExists)('getActiveJourneyApiV1UsersUserIdJourneysActiveGet', 'userId', userId);
+            const localVarPath = `/api/v1/users/{user_id}/journeys/active`
+                .replace(`{${"user_id"}}`, encodeURIComponent(String(userId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication OAuth2PasswordBearer required
+            // oauth required
+            await (0, common_1.setOAuthToObject)(localVarHeaderParameter, "OAuth2PasswordBearer", [], configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Get the current authenticated user.
          * @summary Get Current User
          * @param {*} [options] Override http request option.
@@ -1370,6 +1402,20 @@ const UsersApiFp = function (configuration) {
             return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Get the active journey for a specific user.
+         * @summary Get Active Journey
+         * @param {string} userId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getActiveJourneyApiV1UsersUserIdJourneysActiveGet(userId, options) {
+            var _a, _b, _c;
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getActiveJourneyApiV1UsersUserIdJourneysActiveGet(userId, options);
+            const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+            const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['UsersApi.getActiveJourneyApiV1UsersUserIdJourneysActiveGet']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Get the current authenticated user.
          * @summary Get Current User
          * @param {*} [options] Override http request option.
@@ -1503,6 +1549,16 @@ const UsersApiFactory = function (configuration, basePath, axios) {
             return localVarFp.deleteUserApiV1UsersUserIdDelete(userId, options).then((request) => request(axios, basePath));
         },
         /**
+         * Get the active journey for a specific user.
+         * @summary Get Active Journey
+         * @param {string} userId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getActiveJourneyApiV1UsersUserIdJourneysActiveGet(userId, options) {
+            return localVarFp.getActiveJourneyApiV1UsersUserIdJourneysActiveGet(userId, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Get the current authenticated user.
          * @summary Get Current User
          * @param {*} [options] Override http request option.
@@ -1603,6 +1659,17 @@ class UsersApi extends base_1.BaseAPI {
      */
     deleteUserApiV1UsersUserIdDelete(userId, options) {
         return (0, exports.UsersApiFp)(this.configuration).deleteUserApiV1UsersUserIdDelete(userId, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Get the active journey for a specific user.
+     * @summary Get Active Journey
+     * @param {string} userId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    getActiveJourneyApiV1UsersUserIdJourneysActiveGet(userId, options) {
+        return (0, exports.UsersApiFp)(this.configuration).getActiveJourneyApiV1UsersUserIdJourneysActiveGet(userId, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Get the current authenticated user.

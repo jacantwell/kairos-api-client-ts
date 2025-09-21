@@ -5,6 +5,7 @@ All URIs are relative to *http://localhost*
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
 |[**deleteUserApiV1UsersUserIdDelete**](#deleteuserapiv1usersuseriddelete) | **DELETE** /api/v1/users/{user_id} | Delete User|
+|[**getActiveJourneyApiV1UsersUserIdJourneysActiveGet**](#getactivejourneyapiv1usersuseridjourneysactiveget) | **GET** /api/v1/users/{user_id}/journeys/active | Get Active Journey|
 |[**getCurrentUserApiV1UsersMeGet**](#getcurrentuserapiv1usersmeget) | **GET** /api/v1/users/me | Get Current User|
 |[**getUserByIdApiV1UsersUserIdGet**](#getuserbyidapiv1usersuseridget) | **GET** /api/v1/users/{user_id} | Get User By Id|
 |[**getUserJourneysApiV1UsersUserIdJourneysGet**](#getuserjourneysapiv1usersuseridjourneysget) | **GET** /api/v1/users/{user_id}/journeys | Get User Journeys|
@@ -33,6 +34,58 @@ const apiInstance = new UsersApi(configuration);
 let userId: string; // (default to undefined)
 
 const { status, data } = await apiInstance.deleteUserApiV1UsersUserIdDelete(
+    userId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **userId** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+**any**
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Successful Response |  -  |
+|**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getActiveJourneyApiV1UsersUserIdJourneysActiveGet**
+> any getActiveJourneyApiV1UsersUserIdJourneysActiveGet()
+
+Get the active journey for a specific user.
+
+### Example
+
+```typescript
+import {
+    UsersApi,
+    Configuration
+} from './api';
+
+const configuration = new Configuration();
+const apiInstance = new UsersApi(configuration);
+
+let userId: string; // (default to undefined)
+
+const { status, data } = await apiInstance.getActiveJourneyApiV1UsersUserIdJourneysActiveGet(
     userId
 );
 ```

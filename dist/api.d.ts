@@ -824,6 +824,14 @@ export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) 
      */
     deleteUserApiV1UsersUserIdDelete: (userId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     * Get the active journey for a specific user.
+     * @summary Get Active Journey
+     * @param {string} userId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getActiveJourneyApiV1UsersUserIdJourneysActiveGet: (userId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * Get the current authenticated user.
      * @summary Get Current User
      * @param {*} [options] Override http request option.
@@ -903,6 +911,14 @@ export declare const UsersApiFp: (configuration?: Configuration) => {
      */
     deleteUserApiV1UsersUserIdDelete(userId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>>;
     /**
+     * Get the active journey for a specific user.
+     * @summary Get Active Journey
+     * @param {string} userId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getActiveJourneyApiV1UsersUserIdJourneysActiveGet(userId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>>;
+    /**
      * Get the current authenticated user.
      * @summary Get Current User
      * @param {*} [options] Override http request option.
@@ -981,6 +997,14 @@ export declare const UsersApiFactory: (configuration?: Configuration, basePath?:
      * @throws {RequiredError}
      */
     deleteUserApiV1UsersUserIdDelete(userId: string, options?: RawAxiosRequestConfig): AxiosPromise<any>;
+    /**
+     * Get the active journey for a specific user.
+     * @summary Get Active Journey
+     * @param {string} userId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getActiveJourneyApiV1UsersUserIdJourneysActiveGet(userId: string, options?: RawAxiosRequestConfig): AxiosPromise<any>;
     /**
      * Get the current authenticated user.
      * @summary Get Current User
@@ -1063,6 +1087,15 @@ export declare class UsersApi extends BaseAPI {
      * @memberof UsersApi
      */
     deleteUserApiV1UsersUserIdDelete(userId: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<any, any>>;
+    /**
+     * Get the active journey for a specific user.
+     * @summary Get Active Journey
+     * @param {string} userId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    getActiveJourneyApiV1UsersUserIdJourneysActiveGet(userId: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<any, any>>;
     /**
      * Get the current authenticated user.
      * @summary Get Current User
