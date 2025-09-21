@@ -696,6 +696,47 @@ const JourneysApiAxiosParamCreator = function (configuration) {
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * Update a marker in a journey.
+         * @summary Update Journey Marker
+         * @param {string} journeyId
+         * @param {string} markerId
+         * @param {Marker} marker
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdPut: async (journeyId, markerId, marker, options = {}) => {
+            // verify required parameter 'journeyId' is not null or undefined
+            (0, common_1.assertParamExists)('updateJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdPut', 'journeyId', journeyId);
+            // verify required parameter 'markerId' is not null or undefined
+            (0, common_1.assertParamExists)('updateJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdPut', 'markerId', markerId);
+            // verify required parameter 'marker' is not null or undefined
+            (0, common_1.assertParamExists)('updateJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdPut', 'marker', marker);
+            const localVarPath = `/api/v1/journeys/{journey_id}/markers/{marker_id}`
+                .replace(`{${"journey_id"}}`, encodeURIComponent(String(journeyId)))
+                .replace(`{${"marker_id"}}`, encodeURIComponent(String(markerId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication OAuth2PasswordBearer required
+            // oauth required
+            await (0, common_1.setOAuthToObject)(localVarHeaderParameter, "OAuth2PasswordBearer", [], configuration);
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(marker, localVarRequestOptions, configuration);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     };
 };
 exports.JourneysApiAxiosParamCreator = JourneysApiAxiosParamCreator;
@@ -834,6 +875,22 @@ const JourneysApiFp = function (configuration) {
             const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['JourneysApi.toggleActiveJourneyApiV1JourneysJourneyIdActivePatch']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
             return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * Update a marker in a journey.
+         * @summary Update Journey Marker
+         * @param {string} journeyId
+         * @param {string} markerId
+         * @param {Marker} marker
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdPut(journeyId, markerId, marker, options) {
+            var _a, _b, _c;
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdPut(journeyId, markerId, marker, options);
+            const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+            const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['JourneysApi.updateJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdPut']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     };
 };
 exports.JourneysApiFp = JourneysApiFp;
@@ -935,6 +992,18 @@ const JourneysApiFactory = function (configuration, basePath, axios) {
          */
         toggleActiveJourneyApiV1JourneysJourneyIdActivePatch(journeyId, options) {
             return localVarFp.toggleActiveJourneyApiV1JourneysJourneyIdActivePatch(journeyId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Update a marker in a journey.
+         * @summary Update Journey Marker
+         * @param {string} journeyId
+         * @param {string} markerId
+         * @param {Marker} marker
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdPut(journeyId, markerId, marker, options) {
+            return localVarFp.updateJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdPut(journeyId, markerId, marker, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1046,6 +1115,19 @@ class JourneysApi extends base_1.BaseAPI {
      */
     toggleActiveJourneyApiV1JourneysJourneyIdActivePatch(journeyId, options) {
         return (0, exports.JourneysApiFp)(this.configuration).toggleActiveJourneyApiV1JourneysJourneyIdActivePatch(journeyId, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Update a marker in a journey.
+     * @summary Update Journey Marker
+     * @param {string} journeyId
+     * @param {string} markerId
+     * @param {Marker} marker
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof JourneysApi
+     */
+    updateJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdPut(journeyId, markerId, marker, options) {
+        return (0, exports.JourneysApiFp)(this.configuration).updateJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdPut(journeyId, markerId, marker, options).then((request) => request(this.axios, this.basePath));
     }
 }
 exports.JourneysApi = JourneysApi;

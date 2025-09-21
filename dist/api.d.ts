@@ -558,6 +558,16 @@ export declare const JourneysApiAxiosParamCreator: (configuration?: Configuratio
      * @throws {RequiredError}
      */
     toggleActiveJourneyApiV1JourneysJourneyIdActivePatch: (journeyId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Update a marker in a journey.
+     * @summary Update Journey Marker
+     * @param {string} journeyId
+     * @param {string} markerId
+     * @param {Marker} marker
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    updateJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdPut: (journeyId: string, markerId: string, marker: Marker, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
  * JourneysApi - functional programming interface
@@ -638,6 +648,16 @@ export declare const JourneysApiFp: (configuration?: Configuration) => {
      * @throws {RequiredError}
      */
     toggleActiveJourneyApiV1JourneysJourneyIdActivePatch(journeyId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>>;
+    /**
+     * Update a marker in a journey.
+     * @summary Update Journey Marker
+     * @param {string} journeyId
+     * @param {string} markerId
+     * @param {Marker} marker
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    updateJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdPut(journeyId: string, markerId: string, marker: Marker, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>>;
 };
 /**
  * JourneysApi - factory interface
@@ -718,6 +738,16 @@ export declare const JourneysApiFactory: (configuration?: Configuration, basePat
      * @throws {RequiredError}
      */
     toggleActiveJourneyApiV1JourneysJourneyIdActivePatch(journeyId: string, options?: RawAxiosRequestConfig): AxiosPromise<any>;
+    /**
+     * Update a marker in a journey.
+     * @summary Update Journey Marker
+     * @param {string} journeyId
+     * @param {string} markerId
+     * @param {Marker} marker
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    updateJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdPut(journeyId: string, markerId: string, marker: Marker, options?: RawAxiosRequestConfig): AxiosPromise<any>;
 };
 /**
  * JourneysApi - object-oriented interface
@@ -809,6 +839,17 @@ export declare class JourneysApi extends BaseAPI {
      * @memberof JourneysApi
      */
     toggleActiveJourneyApiV1JourneysJourneyIdActivePatch(journeyId: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<any, any>>;
+    /**
+     * Update a marker in a journey.
+     * @summary Update Journey Marker
+     * @param {string} journeyId
+     * @param {string} markerId
+     * @param {Marker} marker
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof JourneysApi
+     */
+    updateJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdPut(journeyId: string, markerId: string, marker: Marker, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<any, any>>;
 }
 /**
  * UsersApi - axios parameter creator

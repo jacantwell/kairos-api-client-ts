@@ -13,6 +13,7 @@ All URIs are relative to *http://localhost*
 |[**getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet**](#getnearbyjourneysapiv1journeysjourneyidjourneysnearbyget) | **GET** /api/v1/journeys/{journey_id}/journeys/nearby | Get Nearby Journeys|
 |[**setCompletedJourneyApiV1JourneysJourneyIdPatch**](#setcompletedjourneyapiv1journeysjourneyidpatch) | **PATCH** /api/v1/journeys/{journey_id} | Set Completed Journey|
 |[**toggleActiveJourneyApiV1JourneysJourneyIdActivePatch**](#toggleactivejourneyapiv1journeysjourneyidactivepatch) | **PATCH** /api/v1/journeys/{journey_id}/active | Toggle Active Journey|
+|[**updateJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdPut**](#updatejourneymarkerapiv1journeysjourneyidmarkersmarkeridput) | **PUT** /api/v1/journeys/{journey_id}/markers/{marker_id} | Update Journey Marker|
 
 # **addMarkerToJourneyApiV1JourneysJourneyIdMarkersPost**
 > Marker addMarkerToJourneyApiV1JourneysJourneyIdMarkersPost(marker)
@@ -477,6 +478,65 @@ const { status, data } = await apiInstance.toggleActiveJourneyApiV1JourneysJourn
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Successful Response |  -  |
+|**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **updateJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdPut**
+> any updateJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdPut(marker)
+
+Update a marker in a journey.
+
+### Example
+
+```typescript
+import {
+    JourneysApi,
+    Configuration,
+    Marker
+} from './api';
+
+const configuration = new Configuration();
+const apiInstance = new JourneysApi(configuration);
+
+let journeyId: string; // (default to undefined)
+let markerId: string; // (default to undefined)
+let marker: Marker; //
+
+const { status, data } = await apiInstance.updateJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdPut(
+    journeyId,
+    markerId,
+    marker
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **marker** | **Marker**|  | |
+| **journeyId** | [**string**] |  | defaults to undefined|
+| **markerId** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+**any**
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 
