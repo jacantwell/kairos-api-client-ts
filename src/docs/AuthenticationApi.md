@@ -10,7 +10,7 @@ All URIs are relative to *http://localhost*
 # **loginApiV1AuthTokenPost**
 > Tokens loginApiV1AuthTokenPost()
 
-Authenticate a user via their password and return an access token adn refresh token.
+Authenticate a user and return access and refresh tokens.  Validates user credentials and generates JWT access and refresh tokens for authenticated sessions.  Args:     db: Database dependency for accessing data stores.     data: OAuth2 password request form containing username (email) and password.  Raises:     HTTPException: 400 if username or password is incorrect.  Returns:     Tokens: Object containing access_token and refresh_token.
 
 ### Example
 
@@ -75,8 +75,9 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **refreshApiV1AuthRefreshPost**
-> any refreshApiV1AuthRefreshPost()
+> Tokens refreshApiV1AuthRefreshPost()
 
+Refresh an access token using a refresh token.  Validates a refresh token and generates a new access token. The same refresh token is returned for continued use.  Args:     refresh_token: Valid JWT refresh token.  Raises:     HTTPException: 401 if refresh token has expired.     HTTPException: 403 if refresh token is invalid.  Returns:     Tokens: Object containing new access_token and the same refresh_token.  Note:     TODO: Add logic for refresh token rotation for improved security.     This requires maintaining a record of blacklisted refresh tokens.
 
 ### Example
 
@@ -105,7 +106,7 @@ const { status, data } = await apiInstance.refreshApiV1AuthRefreshPost(
 
 ### Return type
 
-**any**
+**Tokens**
 
 ### Authorization
 

@@ -172,6 +172,19 @@ export declare const MarkerMarkerTypeEnum: {
 };
 export type MarkerMarkerTypeEnum = typeof MarkerMarkerTypeEnum[keyof typeof MarkerMarkerTypeEnum];
 /**
+ * Standard message response model.
+ * @export
+ * @interface MessageResponse
+ */
+export interface MessageResponse {
+    /**
+     *
+     * @type {string}
+     * @memberof MessageResponse
+     */
+    'message': string;
+}
+/**
  *
  * @export
  * @interface Tokens
@@ -289,7 +302,7 @@ export interface ValidationErrorLocInner {
  */
 export declare const AuthenticationApiAxiosParamCreator: (configuration?: Configuration) => {
     /**
-     * Authenticate a user via their password and return an access token adn refresh token.
+     * Authenticate a user and return access and refresh tokens.  Validates user credentials and generates JWT access and refresh tokens for authenticated sessions.  Args:     db: Database dependency for accessing data stores.     data: OAuth2 password request form containing username (email) and password.  Raises:     HTTPException: 400 if username or password is incorrect.  Returns:     Tokens: Object containing access_token and refresh_token.
      * @summary Login
      * @param {string} username
      * @param {string} password
@@ -302,7 +315,7 @@ export declare const AuthenticationApiAxiosParamCreator: (configuration?: Config
      */
     loginApiV1AuthTokenPost: (username: string, password: string, grantType?: string | null, scope?: string, clientId?: string | null, clientSecret?: string | null, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     *
+     * Refresh an access token using a refresh token.  Validates a refresh token and generates a new access token. The same refresh token is returned for continued use.  Args:     refresh_token: Valid JWT refresh token.  Raises:     HTTPException: 401 if refresh token has expired.     HTTPException: 403 if refresh token is invalid.  Returns:     Tokens: Object containing new access_token and the same refresh_token.  Note:     TODO: Add logic for refresh token rotation for improved security.     This requires maintaining a record of blacklisted refresh tokens.
      * @summary Refresh
      * @param {string} refreshToken
      * @param {*} [options] Override http request option.
@@ -316,7 +329,7 @@ export declare const AuthenticationApiAxiosParamCreator: (configuration?: Config
  */
 export declare const AuthenticationApiFp: (configuration?: Configuration) => {
     /**
-     * Authenticate a user via their password and return an access token adn refresh token.
+     * Authenticate a user and return access and refresh tokens.  Validates user credentials and generates JWT access and refresh tokens for authenticated sessions.  Args:     db: Database dependency for accessing data stores.     data: OAuth2 password request form containing username (email) and password.  Raises:     HTTPException: 400 if username or password is incorrect.  Returns:     Tokens: Object containing access_token and refresh_token.
      * @summary Login
      * @param {string} username
      * @param {string} password
@@ -329,13 +342,13 @@ export declare const AuthenticationApiFp: (configuration?: Configuration) => {
      */
     loginApiV1AuthTokenPost(username: string, password: string, grantType?: string | null, scope?: string, clientId?: string | null, clientSecret?: string | null, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Tokens>>;
     /**
-     *
+     * Refresh an access token using a refresh token.  Validates a refresh token and generates a new access token. The same refresh token is returned for continued use.  Args:     refresh_token: Valid JWT refresh token.  Raises:     HTTPException: 401 if refresh token has expired.     HTTPException: 403 if refresh token is invalid.  Returns:     Tokens: Object containing new access_token and the same refresh_token.  Note:     TODO: Add logic for refresh token rotation for improved security.     This requires maintaining a record of blacklisted refresh tokens.
      * @summary Refresh
      * @param {string} refreshToken
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    refreshApiV1AuthRefreshPost(refreshToken: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>>;
+    refreshApiV1AuthRefreshPost(refreshToken: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Tokens>>;
 };
 /**
  * AuthenticationApi - factory interface
@@ -343,7 +356,7 @@ export declare const AuthenticationApiFp: (configuration?: Configuration) => {
  */
 export declare const AuthenticationApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
     /**
-     * Authenticate a user via their password and return an access token adn refresh token.
+     * Authenticate a user and return access and refresh tokens.  Validates user credentials and generates JWT access and refresh tokens for authenticated sessions.  Args:     db: Database dependency for accessing data stores.     data: OAuth2 password request form containing username (email) and password.  Raises:     HTTPException: 400 if username or password is incorrect.  Returns:     Tokens: Object containing access_token and refresh_token.
      * @summary Login
      * @param {string} username
      * @param {string} password
@@ -356,13 +369,13 @@ export declare const AuthenticationApiFactory: (configuration?: Configuration, b
      */
     loginApiV1AuthTokenPost(username: string, password: string, grantType?: string | null, scope?: string, clientId?: string | null, clientSecret?: string | null, options?: RawAxiosRequestConfig): AxiosPromise<Tokens>;
     /**
-     *
+     * Refresh an access token using a refresh token.  Validates a refresh token and generates a new access token. The same refresh token is returned for continued use.  Args:     refresh_token: Valid JWT refresh token.  Raises:     HTTPException: 401 if refresh token has expired.     HTTPException: 403 if refresh token is invalid.  Returns:     Tokens: Object containing new access_token and the same refresh_token.  Note:     TODO: Add logic for refresh token rotation for improved security.     This requires maintaining a record of blacklisted refresh tokens.
      * @summary Refresh
      * @param {string} refreshToken
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    refreshApiV1AuthRefreshPost(refreshToken: string, options?: RawAxiosRequestConfig): AxiosPromise<any>;
+    refreshApiV1AuthRefreshPost(refreshToken: string, options?: RawAxiosRequestConfig): AxiosPromise<Tokens>;
 };
 /**
  * AuthenticationApi - object-oriented interface
@@ -372,7 +385,7 @@ export declare const AuthenticationApiFactory: (configuration?: Configuration, b
  */
 export declare class AuthenticationApi extends BaseAPI {
     /**
-     * Authenticate a user via their password and return an access token adn refresh token.
+     * Authenticate a user and return access and refresh tokens.  Validates user credentials and generates JWT access and refresh tokens for authenticated sessions.  Args:     db: Database dependency for accessing data stores.     data: OAuth2 password request form containing username (email) and password.  Raises:     HTTPException: 400 if username or password is incorrect.  Returns:     Tokens: Object containing access_token and refresh_token.
      * @summary Login
      * @param {string} username
      * @param {string} password
@@ -386,14 +399,14 @@ export declare class AuthenticationApi extends BaseAPI {
      */
     loginApiV1AuthTokenPost(username: string, password: string, grantType?: string | null, scope?: string, clientId?: string | null, clientSecret?: string | null, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<Tokens, any>>;
     /**
-     *
+     * Refresh an access token using a refresh token.  Validates a refresh token and generates a new access token. The same refresh token is returned for continued use.  Args:     refresh_token: Valid JWT refresh token.  Raises:     HTTPException: 401 if refresh token has expired.     HTTPException: 403 if refresh token is invalid.  Returns:     Tokens: Object containing new access_token and the same refresh_token.  Note:     TODO: Add logic for refresh token rotation for improved security.     This requires maintaining a record of blacklisted refresh tokens.
      * @summary Refresh
      * @param {string} refreshToken
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuthenticationApi
      */
-    refreshApiV1AuthRefreshPost(refreshToken: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<any, any>>;
+    refreshApiV1AuthRefreshPost(refreshToken: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<Tokens, any>>;
 }
 /**
  * DefaultApi - axios parameter creator
@@ -485,7 +498,7 @@ export declare class DefaultApi extends BaseAPI {
  */
 export declare const JourneysApiAxiosParamCreator: (configuration?: Configuration) => {
     /**
-     * Add a marker to a journey.
+     * Add a marker to a journey.  Creates a new marker associated with the specified journey and the authenticated user.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey to add the marker to.     marker: Marker model containing the marker information.  Raises:     HTTPException: 404 if journey is not found.     HTTPException: 400 if marker creation fails.  Returns:     Marker: The newly created marker.
      * @summary Add Marker To Journey
      * @param {string} journeyId
      * @param {Marker} marker
@@ -494,7 +507,7 @@ export declare const JourneysApiAxiosParamCreator: (configuration?: Configuratio
      */
     addMarkerToJourneyApiV1JourneysJourneyIdMarkersPost: (journeyId: string, marker: Marker, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     * Register a new journey.
+     * Create a new journey.  Creates a new journey for the authenticated user.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey: Journey model containing the journey information.  Raises:     HTTPException: 400 if journey creation fails.  Returns:     Journey: The newly created journey.
      * @summary Create Journey
      * @param {Journey} journey
      * @param {*} [options] Override http request option.
@@ -502,7 +515,7 @@ export declare const JourneysApiAxiosParamCreator: (configuration?: Configuratio
      */
     createJourneyApiV1JourneysPost: (journey: Journey, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     *
+     * Delete a journey.  Permanently removes a journey from the database.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey to delete.  Raises:     HTTPException: 404 if journey is not found.     HTTPException: 500 if deletion fails.  Returns:     None
      * @summary Delete Journey
      * @param {string} journeyId
      * @param {*} [options] Override http request option.
@@ -510,7 +523,7 @@ export declare const JourneysApiAxiosParamCreator: (configuration?: Configuratio
      */
     deleteJourneyApiV1JourneysJourneyIdDelete: (journeyId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     * Delete a marker from a journey.
+     * Delete a marker from a journey.  Permanently removes a marker from the specified journey.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey containing the marker.     marker_id: Unique identifier of the marker to delete.  Raises:     HTTPException: 404 if journey is not found.     HTTPException: 400 if deletion fails.  Returns:     None
      * @summary Delete Journey Marker
      * @param {string} journeyId
      * @param {string} markerId
@@ -519,7 +532,7 @@ export declare const JourneysApiAxiosParamCreator: (configuration?: Configuratio
      */
     deleteJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdDelete: (journeyId: string, markerId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     * Get a journey by ID.
+     * Get a journey by ID.  Retrieves a specific journey by its unique identifier.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey to retrieve.  Raises:     HTTPException: 404 if journey is not found.  Returns:     Journey: The requested journey.
      * @summary Get Journey
      * @param {string} journeyId
      * @param {*} [options] Override http request option.
@@ -527,7 +540,7 @@ export declare const JourneysApiAxiosParamCreator: (configuration?: Configuratio
      */
     getJourneyApiV1JourneysJourneyIdGet: (journeyId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     * Get all markers for a journey.
+     * Get all markers for a journey.  Retrieves all markers associated with the specified journey.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey whose markers to retrieve.  Raises:     HTTPException: 404 if journey is not found.     HTTPException: 400 if retrieval fails.  Returns:     List[Marker]: List of all markers belonging to the journey.
      * @summary Get Journey Markers
      * @param {string} journeyId
      * @param {*} [options] Override http request option.
@@ -535,7 +548,7 @@ export declare const JourneysApiAxiosParamCreator: (configuration?: Configuratio
      */
     getJourneyMarkersApiV1JourneysJourneyIdMarkersGet: (journeyId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     * Get all journeys with markers near the markers of a given journey.
+     * Get all journeys with markers near the markers of a given journey.  Retrieves journeys that have markers geographically close to the markers of the specified journey.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey to find nearby journeys for.  Raises:     HTTPException: 404 if journey is not found.     HTTPException: 400 if retrieval fails.  Returns:     List[Journey]: List of journeys with nearby markers.
      * @summary Get Nearby Journeys
      * @param {string} journeyId
      * @param {*} [options] Override http request option.
@@ -543,7 +556,7 @@ export declare const JourneysApiAxiosParamCreator: (configuration?: Configuratio
      */
     getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet: (journeyId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     * Set a journey as completed. If a journey is complete it cannot be active.
+     * Set a journey as completed.  Marks a journey as completed and automatically deactivates it. A completed journey cannot be active.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey to mark as completed.  Raises:     HTTPException: 404 if journey is not found.     HTTPException: 500 if update fails.  Returns:     None
      * @summary Set Completed Journey
      * @param {string} journeyId
      * @param {*} [options] Override http request option.
@@ -551,7 +564,7 @@ export declare const JourneysApiAxiosParamCreator: (configuration?: Configuratio
      */
     setCompletedJourneyApiV1JourneysJourneyIdPatch: (journeyId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     *
+     * Toggle a journey\'s active status.  Sets the specified journey as active and deactivates any other active journey for the user. If the specified journey is already active, it will be deactivated. Only one journey can be active per user at a time.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey to toggle.  Raises:     HTTPException: 400 if update fails.  Returns:     None
      * @summary Toggle Active Journey
      * @param {string} journeyId
      * @param {*} [options] Override http request option.
@@ -559,7 +572,7 @@ export declare const JourneysApiAxiosParamCreator: (configuration?: Configuratio
      */
     toggleActiveJourneyApiV1JourneysJourneyIdActivePatch: (journeyId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     * Update a marker in a journey.
+     * Update a marker in a journey.  Updates an existing marker with new information while preserving its ID and ownership.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey containing the marker.     marker_id: Unique identifier of the marker to update.     marker: Marker model containing the updated information.  Raises:     HTTPException: 404 if journey or marker is not found.     HTTPException: 400 if update fails.  Returns:     Marker: The updated marker.
      * @summary Update Journey Marker
      * @param {string} journeyId
      * @param {string} markerId
@@ -575,7 +588,7 @@ export declare const JourneysApiAxiosParamCreator: (configuration?: Configuratio
  */
 export declare const JourneysApiFp: (configuration?: Configuration) => {
     /**
-     * Add a marker to a journey.
+     * Add a marker to a journey.  Creates a new marker associated with the specified journey and the authenticated user.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey to add the marker to.     marker: Marker model containing the marker information.  Raises:     HTTPException: 404 if journey is not found.     HTTPException: 400 if marker creation fails.  Returns:     Marker: The newly created marker.
      * @summary Add Marker To Journey
      * @param {string} journeyId
      * @param {Marker} marker
@@ -584,7 +597,7 @@ export declare const JourneysApiFp: (configuration?: Configuration) => {
      */
     addMarkerToJourneyApiV1JourneysJourneyIdMarkersPost(journeyId: string, marker: Marker, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Marker>>;
     /**
-     * Register a new journey.
+     * Create a new journey.  Creates a new journey for the authenticated user.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey: Journey model containing the journey information.  Raises:     HTTPException: 400 if journey creation fails.  Returns:     Journey: The newly created journey.
      * @summary Create Journey
      * @param {Journey} journey
      * @param {*} [options] Override http request option.
@@ -592,24 +605,24 @@ export declare const JourneysApiFp: (configuration?: Configuration) => {
      */
     createJourneyApiV1JourneysPost(journey: Journey, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Journey>>;
     /**
-     *
+     * Delete a journey.  Permanently removes a journey from the database.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey to delete.  Raises:     HTTPException: 404 if journey is not found.     HTTPException: 500 if deletion fails.  Returns:     None
      * @summary Delete Journey
      * @param {string} journeyId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    deleteJourneyApiV1JourneysJourneyIdDelete(journeyId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>>;
+    deleteJourneyApiV1JourneysJourneyIdDelete(journeyId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
     /**
-     * Delete a marker from a journey.
+     * Delete a marker from a journey.  Permanently removes a marker from the specified journey.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey containing the marker.     marker_id: Unique identifier of the marker to delete.  Raises:     HTTPException: 404 if journey is not found.     HTTPException: 400 if deletion fails.  Returns:     None
      * @summary Delete Journey Marker
      * @param {string} journeyId
      * @param {string} markerId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    deleteJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdDelete(journeyId: string, markerId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>>;
+    deleteJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdDelete(journeyId: string, markerId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
     /**
-     * Get a journey by ID.
+     * Get a journey by ID.  Retrieves a specific journey by its unique identifier.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey to retrieve.  Raises:     HTTPException: 404 if journey is not found.  Returns:     Journey: The requested journey.
      * @summary Get Journey
      * @param {string} journeyId
      * @param {*} [options] Override http request option.
@@ -617,7 +630,7 @@ export declare const JourneysApiFp: (configuration?: Configuration) => {
      */
     getJourneyApiV1JourneysJourneyIdGet(journeyId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Journey>>;
     /**
-     * Get all markers for a journey.
+     * Get all markers for a journey.  Retrieves all markers associated with the specified journey.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey whose markers to retrieve.  Raises:     HTTPException: 404 if journey is not found.     HTTPException: 400 if retrieval fails.  Returns:     List[Marker]: List of all markers belonging to the journey.
      * @summary Get Journey Markers
      * @param {string} journeyId
      * @param {*} [options] Override http request option.
@@ -625,31 +638,31 @@ export declare const JourneysApiFp: (configuration?: Configuration) => {
      */
     getJourneyMarkersApiV1JourneysJourneyIdMarkersGet(journeyId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Marker>>>;
     /**
-     * Get all journeys with markers near the markers of a given journey.
+     * Get all journeys with markers near the markers of a given journey.  Retrieves journeys that have markers geographically close to the markers of the specified journey.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey to find nearby journeys for.  Raises:     HTTPException: 404 if journey is not found.     HTTPException: 400 if retrieval fails.  Returns:     List[Journey]: List of journeys with nearby markers.
      * @summary Get Nearby Journeys
      * @param {string} journeyId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>>;
+    getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Journey>>>;
     /**
-     * Set a journey as completed. If a journey is complete it cannot be active.
+     * Set a journey as completed.  Marks a journey as completed and automatically deactivates it. A completed journey cannot be active.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey to mark as completed.  Raises:     HTTPException: 404 if journey is not found.     HTTPException: 500 if update fails.  Returns:     None
      * @summary Set Completed Journey
      * @param {string} journeyId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    setCompletedJourneyApiV1JourneysJourneyIdPatch(journeyId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>>;
+    setCompletedJourneyApiV1JourneysJourneyIdPatch(journeyId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
     /**
-     *
+     * Toggle a journey\'s active status.  Sets the specified journey as active and deactivates any other active journey for the user. If the specified journey is already active, it will be deactivated. Only one journey can be active per user at a time.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey to toggle.  Raises:     HTTPException: 400 if update fails.  Returns:     None
      * @summary Toggle Active Journey
      * @param {string} journeyId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    toggleActiveJourneyApiV1JourneysJourneyIdActivePatch(journeyId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>>;
+    toggleActiveJourneyApiV1JourneysJourneyIdActivePatch(journeyId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
     /**
-     * Update a marker in a journey.
+     * Update a marker in a journey.  Updates an existing marker with new information while preserving its ID and ownership.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey containing the marker.     marker_id: Unique identifier of the marker to update.     marker: Marker model containing the updated information.  Raises:     HTTPException: 404 if journey or marker is not found.     HTTPException: 400 if update fails.  Returns:     Marker: The updated marker.
      * @summary Update Journey Marker
      * @param {string} journeyId
      * @param {string} markerId
@@ -657,7 +670,7 @@ export declare const JourneysApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    updateJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdPut(journeyId: string, markerId: string, marker: Marker, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>>;
+    updateJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdPut(journeyId: string, markerId: string, marker: Marker, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Marker>>;
 };
 /**
  * JourneysApi - factory interface
@@ -665,7 +678,7 @@ export declare const JourneysApiFp: (configuration?: Configuration) => {
  */
 export declare const JourneysApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
     /**
-     * Add a marker to a journey.
+     * Add a marker to a journey.  Creates a new marker associated with the specified journey and the authenticated user.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey to add the marker to.     marker: Marker model containing the marker information.  Raises:     HTTPException: 404 if journey is not found.     HTTPException: 400 if marker creation fails.  Returns:     Marker: The newly created marker.
      * @summary Add Marker To Journey
      * @param {string} journeyId
      * @param {Marker} marker
@@ -674,7 +687,7 @@ export declare const JourneysApiFactory: (configuration?: Configuration, basePat
      */
     addMarkerToJourneyApiV1JourneysJourneyIdMarkersPost(journeyId: string, marker: Marker, options?: RawAxiosRequestConfig): AxiosPromise<Marker>;
     /**
-     * Register a new journey.
+     * Create a new journey.  Creates a new journey for the authenticated user.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey: Journey model containing the journey information.  Raises:     HTTPException: 400 if journey creation fails.  Returns:     Journey: The newly created journey.
      * @summary Create Journey
      * @param {Journey} journey
      * @param {*} [options] Override http request option.
@@ -682,24 +695,24 @@ export declare const JourneysApiFactory: (configuration?: Configuration, basePat
      */
     createJourneyApiV1JourneysPost(journey: Journey, options?: RawAxiosRequestConfig): AxiosPromise<Journey>;
     /**
-     *
+     * Delete a journey.  Permanently removes a journey from the database.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey to delete.  Raises:     HTTPException: 404 if journey is not found.     HTTPException: 500 if deletion fails.  Returns:     None
      * @summary Delete Journey
      * @param {string} journeyId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    deleteJourneyApiV1JourneysJourneyIdDelete(journeyId: string, options?: RawAxiosRequestConfig): AxiosPromise<any>;
+    deleteJourneyApiV1JourneysJourneyIdDelete(journeyId: string, options?: RawAxiosRequestConfig): AxiosPromise<void>;
     /**
-     * Delete a marker from a journey.
+     * Delete a marker from a journey.  Permanently removes a marker from the specified journey.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey containing the marker.     marker_id: Unique identifier of the marker to delete.  Raises:     HTTPException: 404 if journey is not found.     HTTPException: 400 if deletion fails.  Returns:     None
      * @summary Delete Journey Marker
      * @param {string} journeyId
      * @param {string} markerId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    deleteJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdDelete(journeyId: string, markerId: string, options?: RawAxiosRequestConfig): AxiosPromise<any>;
+    deleteJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdDelete(journeyId: string, markerId: string, options?: RawAxiosRequestConfig): AxiosPromise<void>;
     /**
-     * Get a journey by ID.
+     * Get a journey by ID.  Retrieves a specific journey by its unique identifier.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey to retrieve.  Raises:     HTTPException: 404 if journey is not found.  Returns:     Journey: The requested journey.
      * @summary Get Journey
      * @param {string} journeyId
      * @param {*} [options] Override http request option.
@@ -707,7 +720,7 @@ export declare const JourneysApiFactory: (configuration?: Configuration, basePat
      */
     getJourneyApiV1JourneysJourneyIdGet(journeyId: string, options?: RawAxiosRequestConfig): AxiosPromise<Journey>;
     /**
-     * Get all markers for a journey.
+     * Get all markers for a journey.  Retrieves all markers associated with the specified journey.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey whose markers to retrieve.  Raises:     HTTPException: 404 if journey is not found.     HTTPException: 400 if retrieval fails.  Returns:     List[Marker]: List of all markers belonging to the journey.
      * @summary Get Journey Markers
      * @param {string} journeyId
      * @param {*} [options] Override http request option.
@@ -715,31 +728,31 @@ export declare const JourneysApiFactory: (configuration?: Configuration, basePat
      */
     getJourneyMarkersApiV1JourneysJourneyIdMarkersGet(journeyId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<Marker>>;
     /**
-     * Get all journeys with markers near the markers of a given journey.
+     * Get all journeys with markers near the markers of a given journey.  Retrieves journeys that have markers geographically close to the markers of the specified journey.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey to find nearby journeys for.  Raises:     HTTPException: 404 if journey is not found.     HTTPException: 400 if retrieval fails.  Returns:     List[Journey]: List of journeys with nearby markers.
      * @summary Get Nearby Journeys
      * @param {string} journeyId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId: string, options?: RawAxiosRequestConfig): AxiosPromise<any>;
+    getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<Journey>>;
     /**
-     * Set a journey as completed. If a journey is complete it cannot be active.
+     * Set a journey as completed.  Marks a journey as completed and automatically deactivates it. A completed journey cannot be active.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey to mark as completed.  Raises:     HTTPException: 404 if journey is not found.     HTTPException: 500 if update fails.  Returns:     None
      * @summary Set Completed Journey
      * @param {string} journeyId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    setCompletedJourneyApiV1JourneysJourneyIdPatch(journeyId: string, options?: RawAxiosRequestConfig): AxiosPromise<any>;
+    setCompletedJourneyApiV1JourneysJourneyIdPatch(journeyId: string, options?: RawAxiosRequestConfig): AxiosPromise<void>;
     /**
-     *
+     * Toggle a journey\'s active status.  Sets the specified journey as active and deactivates any other active journey for the user. If the specified journey is already active, it will be deactivated. Only one journey can be active per user at a time.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey to toggle.  Raises:     HTTPException: 400 if update fails.  Returns:     None
      * @summary Toggle Active Journey
      * @param {string} journeyId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    toggleActiveJourneyApiV1JourneysJourneyIdActivePatch(journeyId: string, options?: RawAxiosRequestConfig): AxiosPromise<any>;
+    toggleActiveJourneyApiV1JourneysJourneyIdActivePatch(journeyId: string, options?: RawAxiosRequestConfig): AxiosPromise<void>;
     /**
-     * Update a marker in a journey.
+     * Update a marker in a journey.  Updates an existing marker with new information while preserving its ID and ownership.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey containing the marker.     marker_id: Unique identifier of the marker to update.     marker: Marker model containing the updated information.  Raises:     HTTPException: 404 if journey or marker is not found.     HTTPException: 400 if update fails.  Returns:     Marker: The updated marker.
      * @summary Update Journey Marker
      * @param {string} journeyId
      * @param {string} markerId
@@ -747,7 +760,7 @@ export declare const JourneysApiFactory: (configuration?: Configuration, basePat
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    updateJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdPut(journeyId: string, markerId: string, marker: Marker, options?: RawAxiosRequestConfig): AxiosPromise<any>;
+    updateJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdPut(journeyId: string, markerId: string, marker: Marker, options?: RawAxiosRequestConfig): AxiosPromise<Marker>;
 };
 /**
  * JourneysApi - object-oriented interface
@@ -757,7 +770,7 @@ export declare const JourneysApiFactory: (configuration?: Configuration, basePat
  */
 export declare class JourneysApi extends BaseAPI {
     /**
-     * Add a marker to a journey.
+     * Add a marker to a journey.  Creates a new marker associated with the specified journey and the authenticated user.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey to add the marker to.     marker: Marker model containing the marker information.  Raises:     HTTPException: 404 if journey is not found.     HTTPException: 400 if marker creation fails.  Returns:     Marker: The newly created marker.
      * @summary Add Marker To Journey
      * @param {string} journeyId
      * @param {Marker} marker
@@ -767,7 +780,7 @@ export declare class JourneysApi extends BaseAPI {
      */
     addMarkerToJourneyApiV1JourneysJourneyIdMarkersPost(journeyId: string, marker: Marker, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<Marker, any>>;
     /**
-     * Register a new journey.
+     * Create a new journey.  Creates a new journey for the authenticated user.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey: Journey model containing the journey information.  Raises:     HTTPException: 400 if journey creation fails.  Returns:     Journey: The newly created journey.
      * @summary Create Journey
      * @param {Journey} journey
      * @param {*} [options] Override http request option.
@@ -776,16 +789,16 @@ export declare class JourneysApi extends BaseAPI {
      */
     createJourneyApiV1JourneysPost(journey: Journey, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<Journey, any>>;
     /**
-     *
+     * Delete a journey.  Permanently removes a journey from the database.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey to delete.  Raises:     HTTPException: 404 if journey is not found.     HTTPException: 500 if deletion fails.  Returns:     None
      * @summary Delete Journey
      * @param {string} journeyId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof JourneysApi
      */
-    deleteJourneyApiV1JourneysJourneyIdDelete(journeyId: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<any, any>>;
+    deleteJourneyApiV1JourneysJourneyIdDelete(journeyId: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<void, any>>;
     /**
-     * Delete a marker from a journey.
+     * Delete a marker from a journey.  Permanently removes a marker from the specified journey.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey containing the marker.     marker_id: Unique identifier of the marker to delete.  Raises:     HTTPException: 404 if journey is not found.     HTTPException: 400 if deletion fails.  Returns:     None
      * @summary Delete Journey Marker
      * @param {string} journeyId
      * @param {string} markerId
@@ -793,9 +806,9 @@ export declare class JourneysApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof JourneysApi
      */
-    deleteJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdDelete(journeyId: string, markerId: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<any, any>>;
+    deleteJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdDelete(journeyId: string, markerId: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<void, any>>;
     /**
-     * Get a journey by ID.
+     * Get a journey by ID.  Retrieves a specific journey by its unique identifier.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey to retrieve.  Raises:     HTTPException: 404 if journey is not found.  Returns:     Journey: The requested journey.
      * @summary Get Journey
      * @param {string} journeyId
      * @param {*} [options] Override http request option.
@@ -804,7 +817,7 @@ export declare class JourneysApi extends BaseAPI {
      */
     getJourneyApiV1JourneysJourneyIdGet(journeyId: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<Journey, any>>;
     /**
-     * Get all markers for a journey.
+     * Get all markers for a journey.  Retrieves all markers associated with the specified journey.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey whose markers to retrieve.  Raises:     HTTPException: 404 if journey is not found.     HTTPException: 400 if retrieval fails.  Returns:     List[Marker]: List of all markers belonging to the journey.
      * @summary Get Journey Markers
      * @param {string} journeyId
      * @param {*} [options] Override http request option.
@@ -813,34 +826,34 @@ export declare class JourneysApi extends BaseAPI {
      */
     getJourneyMarkersApiV1JourneysJourneyIdMarkersGet(journeyId: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<Marker[], any>>;
     /**
-     * Get all journeys with markers near the markers of a given journey.
+     * Get all journeys with markers near the markers of a given journey.  Retrieves journeys that have markers geographically close to the markers of the specified journey.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey to find nearby journeys for.  Raises:     HTTPException: 404 if journey is not found.     HTTPException: 400 if retrieval fails.  Returns:     List[Journey]: List of journeys with nearby markers.
      * @summary Get Nearby Journeys
      * @param {string} journeyId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof JourneysApi
      */
-    getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<any, any>>;
+    getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<Journey[], any>>;
     /**
-     * Set a journey as completed. If a journey is complete it cannot be active.
+     * Set a journey as completed.  Marks a journey as completed and automatically deactivates it. A completed journey cannot be active.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey to mark as completed.  Raises:     HTTPException: 404 if journey is not found.     HTTPException: 500 if update fails.  Returns:     None
      * @summary Set Completed Journey
      * @param {string} journeyId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof JourneysApi
      */
-    setCompletedJourneyApiV1JourneysJourneyIdPatch(journeyId: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<any, any>>;
+    setCompletedJourneyApiV1JourneysJourneyIdPatch(journeyId: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<void, any>>;
     /**
-     *
+     * Toggle a journey\'s active status.  Sets the specified journey as active and deactivates any other active journey for the user. If the specified journey is already active, it will be deactivated. Only one journey can be active per user at a time.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey to toggle.  Raises:     HTTPException: 400 if update fails.  Returns:     None
      * @summary Toggle Active Journey
      * @param {string} journeyId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof JourneysApi
      */
-    toggleActiveJourneyApiV1JourneysJourneyIdActivePatch(journeyId: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<any, any>>;
+    toggleActiveJourneyApiV1JourneysJourneyIdActivePatch(journeyId: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<void, any>>;
     /**
-     * Update a marker in a journey.
+     * Update a marker in a journey.  Updates an existing marker with new information while preserving its ID and ownership.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey containing the marker.     marker_id: Unique identifier of the marker to update.     marker: Marker model containing the updated information.  Raises:     HTTPException: 404 if journey or marker is not found.     HTTPException: 400 if update fails.  Returns:     Marker: The updated marker.
      * @summary Update Journey Marker
      * @param {string} journeyId
      * @param {string} markerId
@@ -849,7 +862,7 @@ export declare class JourneysApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof JourneysApi
      */
-    updateJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdPut(journeyId: string, markerId: string, marker: Marker, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<any, any>>;
+    updateJourneyMarkerApiV1JourneysJourneyIdMarkersMarkerIdPut(journeyId: string, markerId: string, marker: Marker, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<Marker, any>>;
 }
 /**
  * UsersApi - axios parameter creator
@@ -857,7 +870,7 @@ export declare class JourneysApi extends BaseAPI {
  */
 export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) => {
     /**
-     * Delete a user by ID.
+     * Delete a user and all associated data.  Permanently deletes a user account along with all their journeys and markers. This operation cannot be undone.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     user_id: Unique identifier of the user to delete.  Raises:     HTTPException: 404 if user is not found.  Returns:     MessageResponse: Confirmation message of successful deletion.
      * @summary Delete User
      * @param {string} userId
      * @param {*} [options] Override http request option.
@@ -865,7 +878,7 @@ export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) 
      */
     deleteUserApiV1UsersUserIdDelete: (userId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     * Get the active journey for a specific user.
+     * Get the active journey for a specific user.  Retrieves the currently active journey for the specified user.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     user_id: Unique identifier of the user whose active journey to retrieve.  Raises:     HTTPException: 400 if user_id is invalid.     HTTPException: 404 if no active journey is found.     HTTPException: 500 if database query fails.  Returns:     Journey: The user\'s currently active journey.
      * @summary Get Active Journey
      * @param {string} userId
      * @param {*} [options] Override http request option.
@@ -873,14 +886,14 @@ export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) 
      */
     getActiveJourneyApiV1UsersUserIdJourneysActiveGet: (userId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     * Get the current authenticated user.
+     * Get the current authenticated user.  Retrieves the user profile for the currently authenticated user.  Args:     user: Current authenticated user from dependency injection.  Returns:     User: The current user\'s profile information.
      * @summary Get Current User
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     getCurrentUserApiV1UsersMeGet: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     * Get a user by ID.
+     * Get a user by their ID.  Retrieves user profile information by user ID.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     user_id: Unique identifier of the user to retrieve.  Raises:     HTTPException: 404 if user is not found.  Returns:     User: The requested user\'s profile information.
      * @summary Get User By Id
      * @param {string} userId
      * @param {*} [options] Override http request option.
@@ -888,7 +901,7 @@ export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) 
      */
     getUserByIdApiV1UsersUserIdGet: (userId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     * Get journeys for a specific user.
+     * Get all journeys for a specific user.  Retrieves all journeys associated with the specified user ID.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     user_id: Unique identifier of the user whose journeys to retrieve.  Raises:     HTTPException: 400 if user_id is invalid.     HTTPException: 500 if database query fails.  Returns:     List[Journey]: List of all journeys belonging to the user.
      * @summary Get User Journeys
      * @param {string} userId
      * @param {*} [options] Override http request option.
@@ -896,7 +909,7 @@ export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) 
      */
     getUserJourneysApiV1UsersUserIdJourneysGet: (userId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     * Register a new user.
+     * Register a new user and send verification email.  Creates a new user account with hashed password, generates a verification token, and sends a verification email to the provided email address.  Args:     db: Database dependency for accessing data stores.     user: User model containing registration information.  Raises:     HTTPException: 400 if email is already registered.  Returns:     None
      * @summary Register User
      * @param {User} user
      * @param {*} [options] Override http request option.
@@ -904,7 +917,7 @@ export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) 
      */
     registerUserApiV1UsersRegisterPost: (user: User, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     *
+     * Request password reset and send reset link via email.  Generates a password reset token and sends a reset link to the user\'s email. Silently succeeds even if email is not found to prevent user enumeration.  Args:     db: Database dependency for accessing data stores.     email: Email address of the user requesting password reset.  Raises:     HTTPException: 500 if multiple users found with the same email (data integrity error).  Returns:     None
      * @summary Reset Password
      * @param {string} email
      * @param {*} [options] Override http request option.
@@ -912,7 +925,7 @@ export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) 
      */
     resetPasswordApiV1UsersResetPasswordPost: (email: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     *
+     * Update user password using reset token.  Validates the password reset token and updates the user\'s password.  Args:     db: Database dependency for accessing data stores.     token: Password reset token.     new_password: New password to set for the user.  Raises:     HTTPException: 400 if token is invalid or expired.     HTTPException: 404 if user is not found or multiple users found.  Returns:     MessageResponse: Confirmation message of password update.
      * @summary Update Password
      * @param {string} token
      * @param {string} newPassword
@@ -921,7 +934,7 @@ export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) 
      */
     updatePasswordApiV1UsersUpdatePasswordPost: (token: string, newPassword: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     * Update a user by ID.
+     * Update a user\'s profile information.  Updates the user profile with the provided information. Password changes are not allowed through this endpoint.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     user_id: Unique identifier of the user to update.     updated_user: User model containing the updated information.  Raises:     HTTPException: 404 if user is not found.     HTTPException: 400 if password change is attempted.  Returns:     User: The updated user profile.
      * @summary Update User
      * @param {string} userId
      * @param {User} user
@@ -930,7 +943,7 @@ export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) 
      */
     updateUserApiV1UsersUserIdPut: (userId: string, user: User, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     *
+     * Verify user email address using verification token.  Validates the verification token and marks the user\'s email as verified.  Args:     db: Database dependency for accessing data stores.     token: Email verification token.  Raises:     HTTPException: 400 if token is invalid or expired.     HTTPException: 404 if user is not found.     HTTPException: 500 if multiple users found (data integrity error).  Returns:     MessageResponse: Confirmation message of verification status.
      * @summary Verify Email
      * @param {string} token
      * @param {*} [options] Override http request option.
@@ -944,30 +957,30 @@ export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) 
  */
 export declare const UsersApiFp: (configuration?: Configuration) => {
     /**
-     * Delete a user by ID.
+     * Delete a user and all associated data.  Permanently deletes a user account along with all their journeys and markers. This operation cannot be undone.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     user_id: Unique identifier of the user to delete.  Raises:     HTTPException: 404 if user is not found.  Returns:     MessageResponse: Confirmation message of successful deletion.
      * @summary Delete User
      * @param {string} userId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    deleteUserApiV1UsersUserIdDelete(userId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>>;
+    deleteUserApiV1UsersUserIdDelete(userId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MessageResponse>>;
     /**
-     * Get the active journey for a specific user.
+     * Get the active journey for a specific user.  Retrieves the currently active journey for the specified user.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     user_id: Unique identifier of the user whose active journey to retrieve.  Raises:     HTTPException: 400 if user_id is invalid.     HTTPException: 404 if no active journey is found.     HTTPException: 500 if database query fails.  Returns:     Journey: The user\'s currently active journey.
      * @summary Get Active Journey
      * @param {string} userId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getActiveJourneyApiV1UsersUserIdJourneysActiveGet(userId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>>;
+    getActiveJourneyApiV1UsersUserIdJourneysActiveGet(userId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Journey>>;
     /**
-     * Get the current authenticated user.
+     * Get the current authenticated user.  Retrieves the user profile for the currently authenticated user.  Args:     user: Current authenticated user from dependency injection.  Returns:     User: The current user\'s profile information.
      * @summary Get Current User
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     getCurrentUserApiV1UsersMeGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>>;
     /**
-     * Get a user by ID.
+     * Get a user by their ID.  Retrieves user profile information by user ID.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     user_id: Unique identifier of the user to retrieve.  Raises:     HTTPException: 404 if user is not found.  Returns:     User: The requested user\'s profile information.
      * @summary Get User By Id
      * @param {string} userId
      * @param {*} [options] Override http request option.
@@ -975,15 +988,15 @@ export declare const UsersApiFp: (configuration?: Configuration) => {
      */
     getUserByIdApiV1UsersUserIdGet(userId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>>;
     /**
-     * Get journeys for a specific user.
+     * Get all journeys for a specific user.  Retrieves all journeys associated with the specified user ID.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     user_id: Unique identifier of the user whose journeys to retrieve.  Raises:     HTTPException: 400 if user_id is invalid.     HTTPException: 500 if database query fails.  Returns:     List[Journey]: List of all journeys belonging to the user.
      * @summary Get User Journeys
      * @param {string} userId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getUserJourneysApiV1UsersUserIdJourneysGet(userId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>>;
+    getUserJourneysApiV1UsersUserIdJourneysGet(userId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Journey>>>;
     /**
-     * Register a new user.
+     * Register a new user and send verification email.  Creates a new user account with hashed password, generates a verification token, and sends a verification email to the provided email address.  Args:     db: Database dependency for accessing data stores.     user: User model containing registration information.  Raises:     HTTPException: 400 if email is already registered.  Returns:     None
      * @summary Register User
      * @param {User} user
      * @param {*} [options] Override http request option.
@@ -991,7 +1004,7 @@ export declare const UsersApiFp: (configuration?: Configuration) => {
      */
     registerUserApiV1UsersRegisterPost(user: User, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>>;
     /**
-     *
+     * Request password reset and send reset link via email.  Generates a password reset token and sends a reset link to the user\'s email. Silently succeeds even if email is not found to prevent user enumeration.  Args:     db: Database dependency for accessing data stores.     email: Email address of the user requesting password reset.  Raises:     HTTPException: 500 if multiple users found with the same email (data integrity error).  Returns:     None
      * @summary Reset Password
      * @param {string} email
      * @param {*} [options] Override http request option.
@@ -999,31 +1012,31 @@ export declare const UsersApiFp: (configuration?: Configuration) => {
      */
     resetPasswordApiV1UsersResetPasswordPost(email: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>>;
     /**
-     *
+     * Update user password using reset token.  Validates the password reset token and updates the user\'s password.  Args:     db: Database dependency for accessing data stores.     token: Password reset token.     new_password: New password to set for the user.  Raises:     HTTPException: 400 if token is invalid or expired.     HTTPException: 404 if user is not found or multiple users found.  Returns:     MessageResponse: Confirmation message of password update.
      * @summary Update Password
      * @param {string} token
      * @param {string} newPassword
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    updatePasswordApiV1UsersUpdatePasswordPost(token: string, newPassword: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>>;
+    updatePasswordApiV1UsersUpdatePasswordPost(token: string, newPassword: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MessageResponse>>;
     /**
-     * Update a user by ID.
+     * Update a user\'s profile information.  Updates the user profile with the provided information. Password changes are not allowed through this endpoint.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     user_id: Unique identifier of the user to update.     updated_user: User model containing the updated information.  Raises:     HTTPException: 404 if user is not found.     HTTPException: 400 if password change is attempted.  Returns:     User: The updated user profile.
      * @summary Update User
      * @param {string} userId
      * @param {User} user
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    updateUserApiV1UsersUserIdPut(userId: string, user: User, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>>;
+    updateUserApiV1UsersUserIdPut(userId: string, user: User, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>>;
     /**
-     *
+     * Verify user email address using verification token.  Validates the verification token and marks the user\'s email as verified.  Args:     db: Database dependency for accessing data stores.     token: Email verification token.  Raises:     HTTPException: 400 if token is invalid or expired.     HTTPException: 404 if user is not found.     HTTPException: 500 if multiple users found (data integrity error).  Returns:     MessageResponse: Confirmation message of verification status.
      * @summary Verify Email
      * @param {string} token
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    verifyEmailApiV1UsersVerifyEmailGet(token: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>>;
+    verifyEmailApiV1UsersVerifyEmailGet(token: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MessageResponse>>;
 };
 /**
  * UsersApi - factory interface
@@ -1031,30 +1044,30 @@ export declare const UsersApiFp: (configuration?: Configuration) => {
  */
 export declare const UsersApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
     /**
-     * Delete a user by ID.
+     * Delete a user and all associated data.  Permanently deletes a user account along with all their journeys and markers. This operation cannot be undone.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     user_id: Unique identifier of the user to delete.  Raises:     HTTPException: 404 if user is not found.  Returns:     MessageResponse: Confirmation message of successful deletion.
      * @summary Delete User
      * @param {string} userId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    deleteUserApiV1UsersUserIdDelete(userId: string, options?: RawAxiosRequestConfig): AxiosPromise<any>;
+    deleteUserApiV1UsersUserIdDelete(userId: string, options?: RawAxiosRequestConfig): AxiosPromise<MessageResponse>;
     /**
-     * Get the active journey for a specific user.
+     * Get the active journey for a specific user.  Retrieves the currently active journey for the specified user.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     user_id: Unique identifier of the user whose active journey to retrieve.  Raises:     HTTPException: 400 if user_id is invalid.     HTTPException: 404 if no active journey is found.     HTTPException: 500 if database query fails.  Returns:     Journey: The user\'s currently active journey.
      * @summary Get Active Journey
      * @param {string} userId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getActiveJourneyApiV1UsersUserIdJourneysActiveGet(userId: string, options?: RawAxiosRequestConfig): AxiosPromise<any>;
+    getActiveJourneyApiV1UsersUserIdJourneysActiveGet(userId: string, options?: RawAxiosRequestConfig): AxiosPromise<Journey>;
     /**
-     * Get the current authenticated user.
+     * Get the current authenticated user.  Retrieves the user profile for the currently authenticated user.  Args:     user: Current authenticated user from dependency injection.  Returns:     User: The current user\'s profile information.
      * @summary Get Current User
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     getCurrentUserApiV1UsersMeGet(options?: RawAxiosRequestConfig): AxiosPromise<User>;
     /**
-     * Get a user by ID.
+     * Get a user by their ID.  Retrieves user profile information by user ID.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     user_id: Unique identifier of the user to retrieve.  Raises:     HTTPException: 404 if user is not found.  Returns:     User: The requested user\'s profile information.
      * @summary Get User By Id
      * @param {string} userId
      * @param {*} [options] Override http request option.
@@ -1062,15 +1075,15 @@ export declare const UsersApiFactory: (configuration?: Configuration, basePath?:
      */
     getUserByIdApiV1UsersUserIdGet(userId: string, options?: RawAxiosRequestConfig): AxiosPromise<User>;
     /**
-     * Get journeys for a specific user.
+     * Get all journeys for a specific user.  Retrieves all journeys associated with the specified user ID.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     user_id: Unique identifier of the user whose journeys to retrieve.  Raises:     HTTPException: 400 if user_id is invalid.     HTTPException: 500 if database query fails.  Returns:     List[Journey]: List of all journeys belonging to the user.
      * @summary Get User Journeys
      * @param {string} userId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getUserJourneysApiV1UsersUserIdJourneysGet(userId: string, options?: RawAxiosRequestConfig): AxiosPromise<any>;
+    getUserJourneysApiV1UsersUserIdJourneysGet(userId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<Journey>>;
     /**
-     * Register a new user.
+     * Register a new user and send verification email.  Creates a new user account with hashed password, generates a verification token, and sends a verification email to the provided email address.  Args:     db: Database dependency for accessing data stores.     user: User model containing registration information.  Raises:     HTTPException: 400 if email is already registered.  Returns:     None
      * @summary Register User
      * @param {User} user
      * @param {*} [options] Override http request option.
@@ -1078,7 +1091,7 @@ export declare const UsersApiFactory: (configuration?: Configuration, basePath?:
      */
     registerUserApiV1UsersRegisterPost(user: User, options?: RawAxiosRequestConfig): AxiosPromise<any>;
     /**
-     *
+     * Request password reset and send reset link via email.  Generates a password reset token and sends a reset link to the user\'s email. Silently succeeds even if email is not found to prevent user enumeration.  Args:     db: Database dependency for accessing data stores.     email: Email address of the user requesting password reset.  Raises:     HTTPException: 500 if multiple users found with the same email (data integrity error).  Returns:     None
      * @summary Reset Password
      * @param {string} email
      * @param {*} [options] Override http request option.
@@ -1086,31 +1099,31 @@ export declare const UsersApiFactory: (configuration?: Configuration, basePath?:
      */
     resetPasswordApiV1UsersResetPasswordPost(email: string, options?: RawAxiosRequestConfig): AxiosPromise<any>;
     /**
-     *
+     * Update user password using reset token.  Validates the password reset token and updates the user\'s password.  Args:     db: Database dependency for accessing data stores.     token: Password reset token.     new_password: New password to set for the user.  Raises:     HTTPException: 400 if token is invalid or expired.     HTTPException: 404 if user is not found or multiple users found.  Returns:     MessageResponse: Confirmation message of password update.
      * @summary Update Password
      * @param {string} token
      * @param {string} newPassword
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    updatePasswordApiV1UsersUpdatePasswordPost(token: string, newPassword: string, options?: RawAxiosRequestConfig): AxiosPromise<any>;
+    updatePasswordApiV1UsersUpdatePasswordPost(token: string, newPassword: string, options?: RawAxiosRequestConfig): AxiosPromise<MessageResponse>;
     /**
-     * Update a user by ID.
+     * Update a user\'s profile information.  Updates the user profile with the provided information. Password changes are not allowed through this endpoint.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     user_id: Unique identifier of the user to update.     updated_user: User model containing the updated information.  Raises:     HTTPException: 404 if user is not found.     HTTPException: 400 if password change is attempted.  Returns:     User: The updated user profile.
      * @summary Update User
      * @param {string} userId
      * @param {User} user
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    updateUserApiV1UsersUserIdPut(userId: string, user: User, options?: RawAxiosRequestConfig): AxiosPromise<any>;
+    updateUserApiV1UsersUserIdPut(userId: string, user: User, options?: RawAxiosRequestConfig): AxiosPromise<User>;
     /**
-     *
+     * Verify user email address using verification token.  Validates the verification token and marks the user\'s email as verified.  Args:     db: Database dependency for accessing data stores.     token: Email verification token.  Raises:     HTTPException: 400 if token is invalid or expired.     HTTPException: 404 if user is not found.     HTTPException: 500 if multiple users found (data integrity error).  Returns:     MessageResponse: Confirmation message of verification status.
      * @summary Verify Email
      * @param {string} token
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    verifyEmailApiV1UsersVerifyEmailGet(token: string, options?: RawAxiosRequestConfig): AxiosPromise<any>;
+    verifyEmailApiV1UsersVerifyEmailGet(token: string, options?: RawAxiosRequestConfig): AxiosPromise<MessageResponse>;
 };
 /**
  * UsersApi - object-oriented interface
@@ -1120,25 +1133,25 @@ export declare const UsersApiFactory: (configuration?: Configuration, basePath?:
  */
 export declare class UsersApi extends BaseAPI {
     /**
-     * Delete a user by ID.
+     * Delete a user and all associated data.  Permanently deletes a user account along with all their journeys and markers. This operation cannot be undone.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     user_id: Unique identifier of the user to delete.  Raises:     HTTPException: 404 if user is not found.  Returns:     MessageResponse: Confirmation message of successful deletion.
      * @summary Delete User
      * @param {string} userId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    deleteUserApiV1UsersUserIdDelete(userId: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<any, any>>;
+    deleteUserApiV1UsersUserIdDelete(userId: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<MessageResponse, any>>;
     /**
-     * Get the active journey for a specific user.
+     * Get the active journey for a specific user.  Retrieves the currently active journey for the specified user.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     user_id: Unique identifier of the user whose active journey to retrieve.  Raises:     HTTPException: 400 if user_id is invalid.     HTTPException: 404 if no active journey is found.     HTTPException: 500 if database query fails.  Returns:     Journey: The user\'s currently active journey.
      * @summary Get Active Journey
      * @param {string} userId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    getActiveJourneyApiV1UsersUserIdJourneysActiveGet(userId: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<any, any>>;
+    getActiveJourneyApiV1UsersUserIdJourneysActiveGet(userId: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<Journey, any>>;
     /**
-     * Get the current authenticated user.
+     * Get the current authenticated user.  Retrieves the user profile for the currently authenticated user.  Args:     user: Current authenticated user from dependency injection.  Returns:     User: The current user\'s profile information.
      * @summary Get Current User
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1146,7 +1159,7 @@ export declare class UsersApi extends BaseAPI {
      */
     getCurrentUserApiV1UsersMeGet(options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<User, any>>;
     /**
-     * Get a user by ID.
+     * Get a user by their ID.  Retrieves user profile information by user ID.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     user_id: Unique identifier of the user to retrieve.  Raises:     HTTPException: 404 if user is not found.  Returns:     User: The requested user\'s profile information.
      * @summary Get User By Id
      * @param {string} userId
      * @param {*} [options] Override http request option.
@@ -1155,16 +1168,16 @@ export declare class UsersApi extends BaseAPI {
      */
     getUserByIdApiV1UsersUserIdGet(userId: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<User, any>>;
     /**
-     * Get journeys for a specific user.
+     * Get all journeys for a specific user.  Retrieves all journeys associated with the specified user ID.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     user_id: Unique identifier of the user whose journeys to retrieve.  Raises:     HTTPException: 400 if user_id is invalid.     HTTPException: 500 if database query fails.  Returns:     List[Journey]: List of all journeys belonging to the user.
      * @summary Get User Journeys
      * @param {string} userId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    getUserJourneysApiV1UsersUserIdJourneysGet(userId: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<any, any>>;
+    getUserJourneysApiV1UsersUserIdJourneysGet(userId: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<Journey[], any>>;
     /**
-     * Register a new user.
+     * Register a new user and send verification email.  Creates a new user account with hashed password, generates a verification token, and sends a verification email to the provided email address.  Args:     db: Database dependency for accessing data stores.     user: User model containing registration information.  Raises:     HTTPException: 400 if email is already registered.  Returns:     None
      * @summary Register User
      * @param {User} user
      * @param {*} [options] Override http request option.
@@ -1173,7 +1186,7 @@ export declare class UsersApi extends BaseAPI {
      */
     registerUserApiV1UsersRegisterPost(user: User, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<any, any>>;
     /**
-     *
+     * Request password reset and send reset link via email.  Generates a password reset token and sends a reset link to the user\'s email. Silently succeeds even if email is not found to prevent user enumeration.  Args:     db: Database dependency for accessing data stores.     email: Email address of the user requesting password reset.  Raises:     HTTPException: 500 if multiple users found with the same email (data integrity error).  Returns:     None
      * @summary Reset Password
      * @param {string} email
      * @param {*} [options] Override http request option.
@@ -1182,7 +1195,7 @@ export declare class UsersApi extends BaseAPI {
      */
     resetPasswordApiV1UsersResetPasswordPost(email: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<any, any>>;
     /**
-     *
+     * Update user password using reset token.  Validates the password reset token and updates the user\'s password.  Args:     db: Database dependency for accessing data stores.     token: Password reset token.     new_password: New password to set for the user.  Raises:     HTTPException: 400 if token is invalid or expired.     HTTPException: 404 if user is not found or multiple users found.  Returns:     MessageResponse: Confirmation message of password update.
      * @summary Update Password
      * @param {string} token
      * @param {string} newPassword
@@ -1190,9 +1203,9 @@ export declare class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    updatePasswordApiV1UsersUpdatePasswordPost(token: string, newPassword: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<any, any>>;
+    updatePasswordApiV1UsersUpdatePasswordPost(token: string, newPassword: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<MessageResponse, any>>;
     /**
-     * Update a user by ID.
+     * Update a user\'s profile information.  Updates the user profile with the provided information. Password changes are not allowed through this endpoint.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     user_id: Unique identifier of the user to update.     updated_user: User model containing the updated information.  Raises:     HTTPException: 404 if user is not found.     HTTPException: 400 if password change is attempted.  Returns:     User: The updated user profile.
      * @summary Update User
      * @param {string} userId
      * @param {User} user
@@ -1200,14 +1213,14 @@ export declare class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    updateUserApiV1UsersUserIdPut(userId: string, user: User, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<any, any>>;
+    updateUserApiV1UsersUserIdPut(userId: string, user: User, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<User, any>>;
     /**
-     *
+     * Verify user email address using verification token.  Validates the verification token and marks the user\'s email as verified.  Args:     db: Database dependency for accessing data stores.     token: Email verification token.  Raises:     HTTPException: 400 if token is invalid or expired.     HTTPException: 404 if user is not found.     HTTPException: 500 if multiple users found (data integrity error).  Returns:     MessageResponse: Confirmation message of verification status.
      * @summary Verify Email
      * @param {string} token
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    verifyEmailApiV1UsersVerifyEmailGet(token: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<any, any>>;
+    verifyEmailApiV1UsersVerifyEmailGet(token: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<MessageResponse, any>>;
 }
