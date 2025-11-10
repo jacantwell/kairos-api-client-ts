@@ -1209,7 +1209,7 @@ export const JourneysApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Journey>>> {
+        async getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['JourneysApi.getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet']?.[localVarOperationServerIndex]?.url;
@@ -1335,7 +1335,7 @@ export const JourneysApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<Journey>> {
+        getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<string>> {
             return localVarFp.getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId, options).then((request) => request(axios, basePath));
         },
         /**

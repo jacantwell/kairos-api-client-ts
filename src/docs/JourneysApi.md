@@ -336,7 +336,7 @@ const { status, data } = await apiInstance.getJourneyMarkersApiV1JourneysJourney
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet**
-> Array<Journey> getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet()
+> Array<string> getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet()
 
 Get all journeys with markers near the markers of a given journey.  Retrieves journeys that have markers geographically close to the markers of the specified journey.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey to find nearby journeys for.  Raises:     HTTPException: 404 if journey is not found.     HTTPException: 400 if retrieval fails.  Returns:     List[Journey]: List of journeys with nearby markers.
 
@@ -367,7 +367,7 @@ const { status, data } = await apiInstance.getNearbyJourneysApiV1JourneysJourney
 
 ### Return type
 
-**Array<Journey>**
+**Array<string>**
 
 ### Authorization
 

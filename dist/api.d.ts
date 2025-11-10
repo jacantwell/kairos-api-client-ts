@@ -644,7 +644,7 @@ export declare const JourneysApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Journey>>>;
+    getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>>;
     /**
      * Set a journey as completed.  Marks a journey as completed and automatically deactivates it. A completed journey cannot be active.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey to mark as completed.  Raises:     HTTPException: 404 if journey is not found.     HTTPException: 500 if update fails.  Returns:     None
      * @summary Set Completed Journey
@@ -734,7 +734,7 @@ export declare const JourneysApiFactory: (configuration?: Configuration, basePat
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<Journey>>;
+    getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<string>>;
     /**
      * Set a journey as completed.  Marks a journey as completed and automatically deactivates it. A completed journey cannot be active.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey to mark as completed.  Raises:     HTTPException: 404 if journey is not found.     HTTPException: 500 if update fails.  Returns:     None
      * @summary Set Completed Journey
@@ -833,7 +833,7 @@ export declare class JourneysApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof JourneysApi
      */
-    getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<Journey[], any>>;
+    getNearbyJourneysApiV1JourneysJourneyIdJourneysNearbyGet(journeyId: string, options?: RawAxiosRequestConfig): Promise<globalAxios.AxiosResponse<string[], any>>;
     /**
      * Set a journey as completed.  Marks a journey as completed and automatically deactivates it. A completed journey cannot be active.  Args:     db: Database dependency for accessing data stores.     user: Current authenticated user from dependency injection.     journey_id: Unique identifier of the journey to mark as completed.  Raises:     HTTPException: 404 if journey is not found.     HTTPException: 500 if update fails.  Returns:     None
      * @summary Set Completed Journey
